@@ -1,3 +1,3 @@
 hello <- function() {
-  print("Hello, Marcelino!")
+  print("Hoch die internationale Solidarität!")
 }

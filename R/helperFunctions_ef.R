@@ -15,4 +15,17 @@ image_ef <- function(img) {
     image(,col=hcl.colors(12, "Grays", rev = FALSE))
 }
 
-
+#Liest eine .csv-Datei der folgenden Struktur ein und gibt sie als n x width x height - Array wieder aus
+#Jede Zeile der .csv Datei bezeichnet ein Bild. Die ersten width Pixel bezeichnen die erste Bildzeile, die
+#zweiten die zweite Bildzeile ...
+#n = Anzahl der Zeilen/Bilder, height = Höhe der Bilder, width = Breite der Bilder
+#TODO: ?-Eintrag
+#TODO: Test
+#TODO: Fehler, Warnings
+csv_to_array_ef <- function(path, width = 64, height = 64) {
+  data  <- read.csv(path)
+  nrow <- nrow(data)
+  data %>% as.matrix() %>% as.double() %>% as.matrix() -> data
+  dim(data) <- c(nrow, width, height)
+  data
+}

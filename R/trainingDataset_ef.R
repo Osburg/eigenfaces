@@ -26,6 +26,11 @@ load_trainingDataset_ef <- function(path, imgDim) {
 trainingDataset_ef <- function(lst) {
   stopifnot("Eingabe muss eine Liste sein" = is.list(lst))
   #TODO: teste, ob alle image_ef Objekte die gleiche imgDim haben
+  #TODO: Gibt allen Einträgen der Liste die gleiche Dimension imgDim <- neuer Parameter der Funktion
+
+  class(lst) <- "trainingDataset_ef"
+
+  lst
 }
 
 #Testet, ob eine Eingabe von der Klasse trainingDataset_ef ist
@@ -34,6 +39,8 @@ is.trainingDataset_ef <- function(td) is.element("trainingDataset_ef", class(td)
 #Normalisiert die Gesichter, d.h. es zieht von jedem Pixel den über das Bild gemittelten Pixelwert ab
 normalize_faces <- function(td) {
   stopifnot("Eingabe muss ein trainingDataset_ef sein" = is.trainingDataset_ef(td))
+  stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>1)
+
   for (i in 1:length(td)) {
     td[[i]] = td[[i]] - sum(td[[i]])/length(td[[i]])
   }
@@ -43,6 +50,7 @@ normalize_faces <- function(td) {
 #Berechnet das Durchschnittsgesicht
 avg_face <- function(td) {
   stopifnot("Eingabe muss ein trainingDataset_ef sein" = is.trainingDataset_ef(td))
+  stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>1)
 
   avg <- 0
   for (i in 1:length(td)){
@@ -53,14 +61,61 @@ avg_face <- function(td) {
   avg
 }
 
-#Berechnet die Kovarianzmatrix zu einem trainingDataset_ef
-cov_ef <- function(td) {
+#Zieht das Durchschnittsgesicht von jedem Gesicht ab
+subtract_avg_face <- function(td) {
+  stopifnot("Eingabe muss ein trainingDataset_ef sein" = is.trainingDataset_ef(td))
+  stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>1)
 
-  #Überführe td in eine Gesichtsmatrix
-  ncol <- length(td)
-  td %>% unlist() %>% matrix(ncol=ncol) -> td
+  #Berechne Durchschnittsgesicht
+  avg <- avg_face(td)
 
+  #Ziehe Durchschnittgesicht von jedem Gesicht ab
+  for (i in 1:length(td)) td[[i]] <- td[[i]] - avg
 
   td
 }
+
+
+#Berechnet die Eigenwerte und Vektoren zur Kovarianzmatrix
+getEigenfaces <- function(td, nfaces = 15) {
+  stopifnot("Eingabe muss ein trainingDataset_ef sein" = is.trainingDataset_ef(td))
+  stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>1)
+
+  #Normalisiere die Eigengesichter und ziehe das Durchschnittsgesicht ab
+  td %>% normalize_faces() %>% subtract_avg_face() -> td
+
+
+  #Überführe td in eine Gesichtsmatrix A
+  ncol <- length(td)
+  td %>% unlist() %>% matrix(ncol=ncol) -> A
+
+  #Berechne die Matrix L = A^T * A
+  L <- t(A) %*% A
+
+  #Löse das Eigenwertproblem für L
+  eig <- eigen(L)
+
+  #Berechne daraus die ersten cp Eigenvektoren von A * A^T
+  cp <- min(length(eig$values), nfaces)
+  eigenvals <- eig$values[1:cp]
+  eigenvects <- eig$vectors[,1:cp]
+  eigenvects <- A %*% eigenvects
+
+  #Erstelle aus den Eigenvektoren ein trainingDataset_ef
+  imgDim <- dim(td[[1]])
+
+  eigenfaces <- list()
+
+  for (i in 1:cp) {
+    eigenface <- eigenvects[,i]
+    dim(eigenface) <- imgDim
+    eigenfaces[[i]] <- image_ef(eigenface)
+  }
+
+  eigenfaces <- trainingDataset_ef(eigenfaces)
+
+  eigenfaces
+}
+
+
 

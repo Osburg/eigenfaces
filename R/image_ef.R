@@ -13,3 +13,5 @@ image_ef <- function(x) {
 #Gebe Bild aus
 print.image_ef <- function(img) imgShow_ef(img)
 
+#Prüfe, ob es sich um ein image_ef handelt
+is.image_ef <- function(img) is.element("image_ef", class(img))

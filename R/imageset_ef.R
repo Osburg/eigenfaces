@@ -44,13 +44,13 @@ imageset_ef <- function(lst) {
 #Testet, ob eine Eingabe von der Klasse imageset_ef_ef ist
 is.imageset_ef <- function(td) is.element("imageset_ef", class(td))
 
-#Normalisiert die Gesichter, d.h. es zieht von jedem Pixel den über das Bild gemittelten Pixelwert ab
-normalize_faces <- function(td) {
+#Normalisiert imageset_ef Objekt
+normalize.imageset_ef <- function(td) {
   stopifnot("Eingabe muss ein imageset_ef sein" = is.imageset_ef(td))
   stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>0)
 
   for (i in 1:length(td)) {
-    td[[i]] = td[[i]] - sum(td[[i]])/length(td[[i]])
+    td[[i]] <- normalize(td[[i]])
   }
   td
 }
@@ -121,12 +121,12 @@ PCA <- function(td, showEigenvals = TRUE) {
 
 
 #Berechnet die Eigenwerte und Vektoren zur Kovarianzmatrix
-getEigenfaces <- function(td, nfaces = 15) {
+get_eigenfaces <- function(td, nfaces = 15) {
   stopifnot("Eingabe muss ein imageset_ef sein" = is.imageset_ef(td))
   stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>0)
 
   #Normalisiere die Eigengesichter und ziehe das Durchschnittsgesicht ab
-  td %>% normalize_faces() %>% subtract_avg_face() -> td
+  td %>% normalize() %>% subtract_avg_face() -> td
 
   #Führe die Hauptkomponentenanalyse durch und entnehmen nur die ersten nfaces Eigenfaces
   lst <- PCA(td, showEigenvals = FALSE)
@@ -138,5 +138,3 @@ getEigenfaces <- function(td, nfaces = 15) {
 }
 
 
-eigenfaces <- getEigenfaces(td, 15)
-class(eigenfaces)

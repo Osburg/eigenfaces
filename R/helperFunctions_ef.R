@@ -39,3 +39,8 @@ to_csv <- function(obj) UseMethod("to_csv")
 to_jpeg <- function(obj) UseMethod("to_csv")
 
 to_png <- function(obj) UseMethod("to_csv")
+
+
+#Generische Funktion zum Normalisieren von image_ef, imageset_ef Objekten
+normalize <- function(obj) UseMethod("normalize")
+

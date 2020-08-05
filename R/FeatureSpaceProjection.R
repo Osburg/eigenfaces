@@ -19,8 +19,8 @@ proj <- function(x,y) {
 #TODO: Es ist bisher nicht sichergestellt, dass die Eigenfaces orthogonal sind (auch wenn es bei Tests stets so war).
 #Man sollte zumindest in der PCA sicherstellen, dass die Eigenwerte paarweise verschieden sind, dies würde orthogonalität absichern
 
-#Projeziert img auf ein gegebenes Set von eigenfaces
-proj_on_eigenfaces <- function(img, eigenfaces, avgFace, showCoefficients = FALSE) {
+#Projiziert image_ef img auf ein gegebenes Set von eigenfaces
+FSP.image_ef <- function(img, eigenfaces, avgFace, showCoefficients = FALSE) {
   stopifnot("eigenfaces muss ein imageset_ef sein" = is.imageset_ef(eigenfaces))
   stopifnot("eigenfaces muss mindestens die Länge 1 haben" = length(eigenfaces)>0)
   stopifnot("img muss ein  image_ef sein" = is.image_ef(img))
@@ -45,6 +45,22 @@ proj_on_eigenfaces <- function(img, eigenfaces, avgFace, showCoefficients = FALS
 
   if(showCoefficients) return(list(projFace, lambda))
   else return(list(projFace))
+}
+
+#Projiziert imageset_ef td auf ein gegebenes Set von eigenfaces
+FSP.imageset_ef <- function(td, eigenfaces, avgFace, showCoefficients = FALSE) {
+  stopifnot("eigenfaces muss ein imageset_ef sein" = is.imageset_ef(eigenfaces))
+  stopifnot("eigenfaces muss mindestens die Länge 1 haben" = length(eigenfaces)>0)
+  stopifnot("td muss ein  imageset_ef sein" = is.imageset_ef(td))
+  stopifnot("Elemente von td und Elemente von eigenfaces müssen die gleiche Dimension besitzen" = dim(td[[1]]) == dim(eigenfaces[[1]]))
+  stopifnot("td muss mindestens die Länge 1 haben" = length(td)>0)
+
+  for (i in 1:length(td)) {
+    td[[i]] <- FSP(td[[i]], eigenfaces, avgFace)
+    print(i)
+  }
+
+  td
 }
 
 

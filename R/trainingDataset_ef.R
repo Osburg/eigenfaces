@@ -39,7 +39,7 @@ is.imageset_ef <- function(td) is.element("imageset_ef", class(td))
 #Normalisiert die Gesichter, d.h. es zieht von jedem Pixel den über das Bild gemittelten Pixelwert ab
 normalize_faces <- function(td) {
   stopifnot("Eingabe muss ein imageset_ef sein" = is.imageset_ef(td))
-  stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>1)
+  stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>0)
 
   for (i in 1:length(td)) {
     td[[i]] = td[[i]] - sum(td[[i]])/length(td[[i]])
@@ -50,7 +50,7 @@ normalize_faces <- function(td) {
 #Berechnet das Durchschnittsgesicht
 avg_face <- function(td) {
   stopifnot("Eingabe muss ein imageset_ef sein" = is.imageset_ef(td))
-  stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>1)
+  stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>0)
 
   avg <- 0
   for (i in 1:length(td)){
@@ -64,7 +64,7 @@ avg_face <- function(td) {
 #Zieht das Durchschnittsgesicht von jedem Gesicht ab
 subtract_avg_face <- function(td) {
   stopifnot("Eingabe muss ein imageset_ef sein" = is.imageset_ef(td))
-  stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>1)
+  stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>0)
 
   #Berechne Durchschnittsgesicht
   avg <- avg_face(td)
@@ -75,15 +75,10 @@ subtract_avg_face <- function(td) {
   td
 }
 
-
-#Berechnet die Eigenwerte und Vektoren zur Kovarianzmatrix
-getEigenfaces <- function(td, nfaces = 15) {
+#Hauptkomponentenanalyse für Bilddateien (die Eigenvektoren werden als image_ef Objekte zurückgegeben)
+PCA <- function(td, eigenvals = TRUE) {
   stopifnot("Eingabe muss ein imageset_ef sein" = is.imageset_ef(td))
-  stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>1)
-
-  #Normalisiere die Eigengesichter und ziehe das Durchschnittsgesicht ab
-  td %>% normalize_faces() %>% subtract_avg_face() -> td
-
+  stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>0)
 
   #Überführe td in eine Gesichtsmatrix A
   ncol <- length(td)
@@ -95,18 +90,16 @@ getEigenfaces <- function(td, nfaces = 15) {
   #Löse das Eigenwertproblem für L
   eig <- eigen(L)
 
-  #Berechne daraus die ersten cp Eigenvektoren von A * A^T
-  cp <- min(length(eig$values), nfaces)
-  eigenvals <- eig$values[1:cp]
-  eigenvects <- eig$vectors[,1:cp]
-  eigenvects <- A %*% eigenvects
+  #Berechne daraus die Eigenvektoren von A * A^T
+  eigenvals <- eig$values
+  eigenvects <- A %*% eig$vectors
 
-  #Erstelle aus den Eigenvektoren ein imageset_ef
+  #Überführe die Eigenvektoren in ein imageset_ef Objekt
   imgDim <- dim(td[[1]])
 
   eigenfaces <- list()
 
-  for (i in 1:cp) {
+  for (i in 1:ncol(eigenvects)) {
     eigenface <- eigenvects[,i]
     dim(eigenface) <- imgDim
     eigenfaces[[i]] <- image_ef(eigenface)
@@ -114,8 +107,24 @@ getEigenfaces <- function(td, nfaces = 15) {
 
   eigenfaces <- imageset_ef(eigenfaces)
 
-  eigenfaces
+  if (eigenvals) return(list(eigenfaces, eigenvals))
+  else return(list(eigenfaces))
 }
 
 
+#Berechnet die Eigenwerte und Vektoren zur Kovarianzmatrix
+getEigenfaces <- function(td, nfaces = 15) {
+  stopifnot("Eingabe muss ein imageset_ef sein" = is.imageset_ef(td))
+  stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>0)
 
+  #Normalisiere die Eigengesichter und ziehe das Durchschnittsgesicht ab
+  td %>% normalize_faces() %>% subtract_avg_face() -> td
+
+  #Führe die Hauptkomponentenanalyse durch und entnehmen nur die ersten nfaces Eigenfaces
+  lst <- PCA(td, eigenvals = FALSE)
+  eigenfaces <- lst[[1]]
+  nfaces <- min(nfaces, length(eigenfaces))
+  eigenfaces <- eigenfaces[1:nfaces]
+
+  eigenfaces
+}

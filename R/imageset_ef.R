@@ -4,6 +4,7 @@ source("R/image_ef.R")
 
 #Lädt .csv-Datei und speichert es als imageset_ef
 load_imageset_ef <- function(path, imgDim) {
+  #imgDim muss Tupel (z.B.) der Form c(64,64) sein.
   #TODO: Baue Funktion ein, um Farbbilder zu laden
 
   #Lese Daten ein und speichere sie als [n_img, imgDim]-Array
@@ -20,6 +21,12 @@ load_imageset_ef <- function(path, imgDim) {
   for (i in 1:dim(data)[1]) td[[i]] <- image_ef(data[i,,])
 
   td
+}
+
+#Lädt .csv-Datei und speichert es als classes_ef
+load_classes_ef <- function(path) {
+  data <- read.csv(path)
+  data
 }
 
 #Erstellt neues imageset_ef_ef mit den Werten aus lst
@@ -136,5 +143,4 @@ get_eigenfaces <- function(td, nfaces = 15) {
 
   imageset_ef(eigenfaces)
 }
-
 

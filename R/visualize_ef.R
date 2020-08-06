@@ -2,6 +2,7 @@ library(tidyverse)
 source("R/helperFunctions_ef.R")
 source("R/imageset_ef.R")
 source("R/image_ef.R")
+source("R/FeatureSpaceProjection.R")
 
 # Import Olivetti
 td <- load_imageset_ef("olivetti_X.csv", c(64,64))
@@ -44,6 +45,13 @@ plot_examples(td, 9, mode=ex)
 # Plot eigenfaces
 
 # Get eigenfaces and then reuse plot_examples function in mode=ef
-ef <- getEigenfaces(td, 9)
+ef <- get_eigenfaces(td, 9)
 plot_examples(ef, 9, mode=ef)
 
+
+################
+# Reconstruction of faces
+
+#TODO: turn this into nice looking format
+FSP(td[[11]], ef, avg_face(normalize(td)))
+td[[11]]

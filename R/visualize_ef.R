@@ -52,6 +52,30 @@ plot_examples(ef, 9, mode=ef)
 ################
 # Reconstruction of faces
 
-#TODO: turn this into nice looking format
+# TODO: turn this into nice looking format
+# TODO: introduce argument. use n eigenfaces for reconstruction
 FSP(td[[11]], ef, avg_face(normalize(td)))
 td[[11]]
+
+
+################
+# Projection on two first eigenvectors
+library(ggplot2)
+
+ef1 <- as.vector(ef[[1]])
+ef2 <- as.vector(ef[[2]])
+
+# Initialization
+data <- data.frame(matrix(ncol=3,nrow=5, dimnames=list(NULL, c("ef1_x", "ef2_y", "class"))))
+
+# Fill with projections and corresponding classes
+for (i in 1:length(td)) {
+  data[i,] <- c(as.vector(td[[i]])%*%ef1,as.vector(td[[i]])%*%ef2,classes[[1]][i])
+}
+
+data
+
+# Scatterplot
+ggplot(data, aes(x=ef1_x, y=ef2_y, color=class)) + geom_point(shape=19, size=1.2) +
+  #geom_text(aes(label=class), size=2, hjust = -1, vjust = 0.3)
+  scale_color_gradientn(colours = rainbow(100))

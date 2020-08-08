@@ -91,7 +91,7 @@ subtract_avg_face <- function(td) {
 }
 
 #Hauptkomponentenanalyse für Bilddateien (die Eigenvektoren werden als image_ef Objekte zurückgegeben)
-PCA <- function(td, showEigenvals = TRUE) {
+PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
   stopifnot("Eingabe muss ein imageset_ef sein" = is.imageset_ef(td))
   stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>0)
 
@@ -99,15 +99,29 @@ PCA <- function(td, showEigenvals = TRUE) {
   ncol <- length(td)
   td %>% unlist() %>% matrix(ncol=ncol) -> A
 
-  #Berechne die Matrix L = A^T * A
-  L <- t(A) %*% A
+  if (quick) {
+    #Berechne die Matrix L = A^T * A
+    L <- t(A) %*% A
 
-  #Löse das Eigenwertproblem für L
-  eig <- eigen(L)
+    #Löse das Eigenwertproblem für L
+    eig <- eigen(L)
 
-  #Berechne daraus die Eigenvektoren von A * A^T
-  eigenvals <- eig$values
-  eigenvects <- A %*% eig$vectors
+    #Berechne daraus die Eigenvektoren von A * A^T
+    eigenvals <- eig$values
+    eigenvects <- A %*% eig$vectors
+  }
+
+  else {
+    #Berechne die Matrix L = A^T * A
+    L <- A %*% t(A)
+
+    #Löse das Eigenwertproblem für L
+    eig <- eigen(L)
+
+    #Berechne daraus die Eigenvektoren von A * A^T
+    eigenvals <- eig$values
+    eigenvects <- eig$vectors
+  }
 
   #Überführe die Eigenvektoren in ein imageset_ef Objekt
   imgDim <- dim(td[[1]])
@@ -128,7 +142,7 @@ PCA <- function(td, showEigenvals = TRUE) {
 
 
 #Berechnet die Eigenwerte und Vektoren zur Kovarianzmatrix
-get_eigenfaces <- function(td, nfaces = 15) {
+get_eigenfaces <- function(td, nfaces = 15, quick = FALSE) {
   stopifnot("Eingabe muss ein imageset_ef sein" = is.imageset_ef(td))
   stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>0)
 
@@ -136,7 +150,7 @@ get_eigenfaces <- function(td, nfaces = 15) {
   td %>% normalize() %>% subtract_avg_face() -> td
 
   #Führe die Hauptkomponentenanalyse durch und entnehmen nur die ersten nfaces Eigenfaces
-  lst <- PCA(td, showEigenvals = FALSE)
+  lst <- PCA(td, showEigenvals = FALSE, quick = quick)
   eigenfaces <- lst[[1]]
   nfaces <- min(nfaces, length(eigenfaces))
   eigenfaces <- eigenfaces[1:nfaces]

@@ -55,13 +55,21 @@ FSP.imageset_ef <- function(td, eigenfaces, avgFace, showCoefficients = FALSE) {
   stopifnot("Elemente von td und Elemente von eigenfaces müssen die gleiche Dimension besitzen" = dim(td[[1]]) == dim(eigenfaces[[1]]))
   stopifnot("td muss mindestens die Länge 1 haben" = length(td)>0)
 
-  for (i in 1:length(td)) {
-    td[[i]] <- FSP(td[[i]], eigenfaces, avgFace)
-    print(i)
+  if (showCoefficients == FALSE) {
+    for (i in 1:length(td)) {
+      td[[i]] <- FSP(td[[i]], eigenfaces, avgFace, showCoefficients = showCoefficients)[[1]]
+    }
+    return(list(td))
   }
 
-  td
+  else {
+    coeffs <- list()
+    for (i in 1:length(td)) {
+      proj <- FSP(td[[i]], eigenfaces, avgFace, showCoefficients = showCoefficients)
+      td[[i]] <- proj[[1]]
+      coeffs[[i]] <- proj[[2]]
+    }
+    return(list(td, coeffs))
+  }
 }
-
-
 

@@ -24,7 +24,7 @@ classification_ef <- function(img, td, nclosest = 3, neigenfaces = 15, quick = F
   stopifnot("td muss mindestens Länge 1 haben" = length(td)>0)
   stopifnot("img und Elemente von eigenfaces müssen die gleiche Dimension besitzen" = dim(img) == dim(td[[1]]))
 
-  #Berechne Eigenfaces (nfaces Stück)
+  #Berechne Eigenfaces (neigenfaces Stück)
   eigenfaces <- get_eigenfaces(td, nfaces = neigenfaces, quick = quick)
   avgFace <- avg_face(normalize(td))
 

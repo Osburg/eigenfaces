@@ -29,7 +29,7 @@ classification_ef <- function(img, td, nfaces = 15) {
   stopifnot("img und Elemente von eigenfaces müssen die gleiche Dimension besitzen" = dim(img) == dim(td[[1]]))
 
   #Berechne Eigenfaces (nfaces Stück)
-  eigenfaces <-
+  eigenfaces <- 1
 
 
   #Berechne Distanzen

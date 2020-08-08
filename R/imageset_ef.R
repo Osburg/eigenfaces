@@ -161,6 +161,22 @@ subtract_avg_face <- function(td) {
 }
 
 #Hauptkomponentenanalyse für Bilddateien (die Eigenvektoren werden als image_ef Objekte zurückgegeben)
+#' Performs principle component analysis
+#'
+#' Calculation of the facematrix A and the eigenvectors of A * A^t.
+#' Returns the eigenvectors as an image_ef object
+#'
+#' @param td List of arrays. Training data.
+#'
+#' @return Returns eigenvectors as image_ef objects
+#' @export
+#'
+#' @examples
+#' # Import Olivetti-faces
+#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+#' PCA(td, showEigenvals = FALSE, quick = quick)
+
+
 PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
   stopifnot("Eingabe muss ein imageset_ef sein" = is.imageset_ef(td))
   stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>0)
@@ -213,6 +229,21 @@ PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
 
 
 #Berechnet die Eigenwerte und Vektoren zur Kovarianzmatrix
+
+#' Calculation of the eigenvectors and eigenvalues of the covariance matrix
+#'
+#' Makes use of the PCA function to perform the principle component analysis
+#'
+#' @param td List of arrays. Training data.
+#' @param nfaces Amount of Eigenfaces
+#' @return Returns n=1,...,nfaces Eigenfaces.
+#'
+#' @examples
+#' # Import Olivetti-faces
+#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+#'get_eigenfaces(td, 9)
+#' @export
+
 get_eigenfaces <- function(td, nfaces = 15, quick = FALSE) {
   stopifnot("Eingabe muss ein imageset_ef sein" = is.imageset_ef(td))
   stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>0)

@@ -1,6 +1,19 @@
 library(tidyverse)
 source("R/helperFunctions_ef.R")
 
+#' Object image_ef
+#'
+#' Creates objects of type image_ef.
+#' is.image_ef is more a general test of an object being interpretable as an image
+#' It is printed as an image in grayscale.
+#' @param x
+#' @return Returns image in grayscale.
+#'
+#' @examples
+#' image_ef(x)
+#' is.image_ef(x)
+#' @export
+
 #Erstelle aus x ein Objekt der Klasse image_ef
 image_ef <- function(x) {
   if (is.null(dim(x))) {

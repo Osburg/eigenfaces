@@ -161,14 +161,16 @@ subtract_avg_face <- function(td) {
 }
 
 #Hauptkomponentenanalyse für Bilddateien (die Eigenvektoren werden als image_ef Objekte zurückgegeben)
-#' Performs principle component analysis
+#' Performs principle component analysis for image files
 #'
-#' Calculation of the facematrix A and the eigenvectors of A * A^t.
-#' Returns the eigenvectors as an image_ef object
+#' Calculates the data covariance matrix of the original data.
+#' Returns eigenvectors of the covariance matrix as an image_ef object.
 #'
-#' @param td List of arrays. Training data.
 #'
-#' @return Returns eigenvectors as image_ef objects
+#' @param td List of arrays, Training data.
+#'
+#' @return Returns eigenvectors of the covariance matrix as image_ef objects
+#' @references Marinovsky F., Wagner P., Gesichtserkennung mit Eigenfaces, FH Zittau/Görlitz
 #' @export
 #'
 #' @examples
@@ -230,9 +232,10 @@ PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
 
 #Berechnet die Eigenwerte und Vektoren zur Kovarianzmatrix
 
-#' Calculation of the eigenvectors and eigenvalues of the covariance matrix
+#' Calculate the eigenvectors and eigenvalues of the covariance matrix
 #'
-#' Makes use of the PCA function to perform the principle component analysis
+#' Makes use of the PCA function to perform the principle component analysis.
+#' The data is normalized before performing the PCA.
 #'
 #' @param td List of arrays. Training data.
 #' @param nfaces Amount of Eigenfaces
@@ -242,6 +245,7 @@ PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
 #' # Import Olivetti-faces
 #' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
 #'get_eigenfaces(td, 9)
+#' @references Marinovsky F., Wagner P., Gesichtserkennung mit Eigenfaces, FH Zittau/Görlitz
 #' @export
 
 get_eigenfaces <- function(td, nfaces = 15, quick = FALSE) {

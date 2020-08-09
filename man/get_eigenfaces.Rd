@@ -2,7 +2,7 @@
 % Please edit documentation in R/imageset_ef.R
 \name{get_eigenfaces}
 \alias{get_eigenfaces}
-\title{Calculation of the eigenvectors and eigenvalues of the covariance matrix}
+\title{Calculate the eigenvectors and eigenvalues of the covariance matrix}
 \usage{
 get_eigenfaces(td, nfaces = 15, quick = FALSE)
 }
@@ -15,10 +15,14 @@ get_eigenfaces(td, nfaces = 15, quick = FALSE)
 Returns n=1,...,nfaces Eigenfaces.
 }
 \description{
-Makes use of the PCA function to perform the principle component analysis
+Makes use of the PCA function to perform the principle component analysis.
+The data is normalized before performing the PCA.
 }
 \examples{
 # Import Olivetti-faces
 td <- load_imageset_ef("olivetti_X.csv", c(64,64))
 get_eigenfaces(td, 9)
+}
+\references{
+Marinovsky F., Wagner P., Gesichtserkennung mit Eigenfaces, FH Zittau/Görlitz
 }

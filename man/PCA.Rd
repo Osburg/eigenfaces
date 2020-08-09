@@ -2,22 +2,25 @@
 % Please edit documentation in R/imageset_ef.R
 \name{PCA}
 \alias{PCA}
-\title{Performs principle component analysis}
+\title{Performs principle component analysis for image files}
 \usage{
 PCA(td, showEigenvals = TRUE, quick = FALSE)
 }
 \arguments{
-\item{td}{List of arrays. Training data.}
+\item{td}{List of arrays, Training data.}
 }
 \value{
-Returns eigenvectors as image_ef objects
+Returns eigenvectors of the covariance matrix as image_ef objects
 }
 \description{
-Calculation of the facematrix A and the eigenvectors of A * A^t.
-Returns the eigenvectors as an image_ef object
+Calculates the data covariance matrix of the original data.
+Returns eigenvectors of the covariance matrix as an image_ef object.
 }
 \examples{
 # Import Olivetti-faces
 td <- load_imageset_ef("olivetti_X.csv", c(64,64))
 PCA(td, showEigenvals = FALSE, quick = quick)
+}
+\references{
+Marinovsky F., Wagner P., Gesichtserkennung mit Eigenfaces, FH Zittau/Görlitz
 }

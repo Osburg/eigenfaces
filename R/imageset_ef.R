@@ -167,26 +167,28 @@ subtract_avg_face <- function(td) {
   td
 }
 
-#' PCA for images
+#' Performs principle component analysis for image files
 #'
-#' Computes eigenvalues and eigenvectors for the covariance matrix of an object of class 'imageset_ef'
+#' Calculates the data covariance matrix of the original data.
+#' Returns eigenvectors (and eigenvalues) of the covariance matrix as an 'imageset_ef' object.
 #'
-#' @param td an object of class 'imageset_ef'
+#' @param td an object of class 'imageset_ef', training data
 #' @param showEigenvals logical vector (TRUE or FASLE)
 #' @param quick logical vector (TRUE or FASLE)
 #'
+#' @return list of length 1 (when showEigenvals <- FALSE; contains an 'imageset_ef' object consisting of the eigenvectors as 'image_ef' objects) or 2 (when showEigenvals <- TRUE; additionally contains a list of the eigenvalues)
+#' @references Marinovsky F., Wagner P., Gesichtserkennung mit Eigenfaces, FH Zittau/Görlitz
+#' @export
+#'
+#' @examples
+#' # Import Olivetti-faces
+#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+#' PCA(td, showEigenvals = FALSE, quick = quick)
 #' @details \code{td} is the 'imageset_ef'-object where the images are saved as 'image_ef' objects. \code{showEigenvals} determins
 #' whether the eigenvalues are returned in addition to the eigenvectors (FALSE means only the eigenvectors are returned).
 #' When the number of pixels of each images is much bigger than the number of images in \code{td} it is faster to diagonalize \code{t(A) %*% A}
 #' instead of the covariance matrix. However, this causes that only a subset of the eigenvectors of the covariance matrix is returned.
 #' If quick is set TRUE, this option is activated.
-#' @export
-#' @example
-#' #' # Import Olivetti-faces
-#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
-#' # PCA
-#' PCA(td)
-#' @return list of length 1 (when showEigenvals <- FALSE; contains an 'imageset_ef' object consisting of the eigenvectors as 'image_ef' objects) or 2 (when showEigenvals <- TRUE; additionally contains a list of the eigenvalues)
 PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
   stopifnot("Eingabe muss ein imageset_ef sein" = is.imageset_ef(td))
   stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>0)
@@ -237,8 +239,23 @@ PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
   else return(list(eigenfaces))
 }
 
+#Berechnet die Eigenwerte und Vektoren zur Kovarianzmatrix
 
-
+#' Calculate the eigenvectors and eigenvalues of the covariance matrix
+#'
+#' Makes use of the PCA function to perform the principle component analysis.
+#' The data is normalized before performing the PCA.
+#'
+#' @param td List of arrays. Training data.
+#' @param nfaces Amount of Eigenfaces
+#' @return Returns n=1,...,nfaces Eigenfaces.
+#'
+#' @examples
+#' # Import Olivetti-faces
+#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+#'get_eigenfaces(td, 9)
+#' @references Marinovsky F., Wagner P., Gesichtserkennung mit Eigenfaces, FH Zittau/Görlitz
+#' @export
 get_eigenfaces <- function(td, nfaces = 15, quick = FALSE) {
   stopifnot("Eingabe muss ein imageset_ef sein" = is.imageset_ef(td))
   stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>0)

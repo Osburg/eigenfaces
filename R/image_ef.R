@@ -4,7 +4,7 @@ source("R/helperFunctions_ef.R")
 #' Create an image_ef object from x.
 #'
 #' @param x A matrix or an atomic vector of type numeric
-#' @return An object of class \code{image_ef} and attribute \code{dim}.
+#' @return An object of class \code{image_ef} and attribute \code{dim}. Values are taken from x.
 #' the value of \code{dim} corresponds to the value of \code{dim(x)}. If
 #' \code{dim} is not set for \code{x}, \code{c(length(x), 1)} is used instead.
 #' @examples

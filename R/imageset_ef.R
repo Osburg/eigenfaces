@@ -12,7 +12,7 @@ source("R/image_ef.R")
 #' @param imgDim Tupel. Two dimensional vector to indicate dimension of seperate
 #' images.
 #'
-#' @return Returns dataset as list.
+#' @return Returns dataset as \code{imageset_ef} object.
 #' @export
 #'
 #' @examples
@@ -56,7 +56,16 @@ load_classes_ef <- function(path) {
   data
 }
 
-#Erstellt neues imageset_ef_ef mit den Werten aus lst
+#' Creates an Object of class 'imageset_ef'
+#'
+#' @param lst list of objects capable of being used as input for \code{image_ef()} function.
+#' @return object of class 'imageset_ef',a list consisting of objects of class 'image_ef'.
+#' @example
+#' # Import Olivetti-faces
+#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+#' # Normalize
+#' normalize(td)
+#' @export
 imageset_ef <- function(lst) {
   stopifnot("Eingabe muss eine Liste sein" = is.list(lst))
   stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(lst)>0)
@@ -86,7 +95,6 @@ is.imageset_ef <- function(td) is.element("imageset_ef", class(td))
 #' @param td List of arrays. Training data.
 #'
 #' @return Returns normalized version of td.
-#' @export
 #'
 #' @examples
 #' # Import Olivetti-faces
@@ -140,7 +148,6 @@ avg_face <- function(td) {
 #' @param td List of arrays. Training data.
 #'
 #' @return Returns td - average face.
-#' @export
 #'
 #' @examples
 #' # Import Olivetti-faces
@@ -160,16 +167,16 @@ subtract_avg_face <- function(td) {
   td
 }
 
-#Hauptkomponentenanalyse für Bilddateien (die Eigenvektoren werden als image_ef Objekte zurückgegeben)
 #' Performs principle component analysis for image files
 #'
 #' Calculates the data covariance matrix of the original data.
-#' Returns eigenvectors of the covariance matrix as an image_ef object.
+#' Returns eigenvectors (and eigenvalues) of the covariance matrix as an 'imageset_ef' object.
 #'
+#' @param td an object of class 'imageset_ef', training data
+#' @param showEigenvals logical vector (TRUE or FASLE)
+#' @param quick logical vector (TRUE or FASLE)
 #'
-#' @param td List of arrays, Training data.
-#'
-#' @return Returns eigenvectors of the covariance matrix as image_ef objects
+#' @return list of length 1 (when showEigenvals <- FALSE; contains an 'imageset_ef' object consisting of the eigenvectors as 'image_ef' objects) or 2 (when showEigenvals <- TRUE; additionally contains a list of the eigenvalues)
 #' @references Marinovsky F., Wagner P., Gesichtserkennung mit Eigenfaces, FH Zittau/Görlitz
 #' @export
 #'
@@ -177,8 +184,11 @@ subtract_avg_face <- function(td) {
 #' # Import Olivetti-faces
 #' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
 #' PCA(td, showEigenvals = FALSE, quick = quick)
-
-
+#' @details \code{td} is the 'imageset_ef'-object where the images are saved as 'image_ef' objects. \code{showEigenvals} determins
+#' whether the eigenvalues are returned in addition to the eigenvectors (FALSE means only the eigenvectors are returned).
+#' When the number of pixels of each images is much bigger than the number of images in \code{td} it is faster to diagonalize \code{t(A) %*% A}
+#' instead of the covariance matrix. However, this causes that only a subset of the eigenvectors of the covariance matrix is returned.
+#' If quick is set TRUE, this option is activated.
 PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
   stopifnot("Eingabe muss ein imageset_ef sein" = is.imageset_ef(td))
   stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>0)
@@ -229,7 +239,6 @@ PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
   else return(list(eigenfaces))
 }
 
-
 #Berechnet die Eigenwerte und Vektoren zur Kovarianzmatrix
 
 #' Calculate the eigenvectors and eigenvalues of the covariance matrix
@@ -247,7 +256,6 @@ PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
 #'get_eigenfaces(td, 9)
 #' @references Marinovsky F., Wagner P., Gesichtserkennung mit Eigenfaces, FH Zittau/Görlitz
 #' @export
-
 get_eigenfaces <- function(td, nfaces = 15, quick = FALSE) {
   stopifnot("Eingabe muss ein imageset_ef sein" = is.imageset_ef(td))
   stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>0)

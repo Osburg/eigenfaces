@@ -13,7 +13,7 @@ subtract_avg_face(td)
 Returns td - average face.
 }
 \description{
-Makes use of avg_face() function to subtract the averagge data (here: face)
+Makes use of avg_face() function to subtract the average data (here: face)
 of a given data set.
 }
 \examples{

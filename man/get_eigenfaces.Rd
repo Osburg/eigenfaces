@@ -9,7 +9,7 @@ get_eigenfaces(td, nfaces = 15, quick = FALSE)
 \arguments{
 \item{td}{List of arrays. Training data.}
 
-\item{nfaces}{Amount of Eigenfaces}
+\item{nfaces}{The desired number of eigenfaces.}
 }
 \value{
 Returns n=1,...,nfaces Eigenfaces.

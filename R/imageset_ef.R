@@ -60,7 +60,7 @@ load_classes_ef <- function(path) {
 #'
 #' @param lst list of objects capable of being used as input for \code{image_ef()} function.
 #' @return object of class 'imageset_ef',a list consisting of objects of class 'image_ef'.
-#' @example
+#' @examples
 #' # Import Olivetti-faces
 #' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
 #' # Normalize
@@ -142,7 +142,7 @@ avg_face <- function(td) {
 #Zieht das Durchschnittsgesicht von jedem Gesicht ab
 #' Subtract Average Face
 #'
-#' Makes use of avg_face() function to subtract the averagge data (here: face)
+#' Makes use of avg_face() function to subtract the average data (here: face)
 #' of a given data set.
 #'
 #' @param td List of arrays. Training data.
@@ -172,11 +172,11 @@ subtract_avg_face <- function(td) {
 #' Calculates the data covariance matrix of the original data.
 #' Returns eigenvectors (and eigenvalues) of the covariance matrix as an 'imageset_ef' object.
 #'
-#' @param td an object of class 'imageset_ef', training data
-#' @param showEigenvals logical vector (TRUE or FASLE)
-#' @param quick logical vector (TRUE or FASLE)
+#' @param td an object of class 'imageset_ef', training data.
+#' @param showEigenvals logical vector (TRUE or FALSE).
+#' @param quick logical vector (TRUE or FALSE).
 #'
-#' @return list of length 1 (when showEigenvals <- FALSE; contains an 'imageset_ef' object consisting of the eigenvectors as 'image_ef' objects) or 2 (when showEigenvals <- TRUE; additionally contains a list of the eigenvalues)
+#' @return list of length 1 (when showEigenvals <- FALSE; contains an 'imageset_ef' object consisting of the eigenvectors as 'image_ef' objects) or 2 (when showEigenvals <- TRUE; additionally contains a list of the eigenvalues).
 #' @references Marinovsky F., Wagner P., Gesichtserkennung mit Eigenfaces, FH Zittau/Görlitz
 #' @export
 #'
@@ -247,7 +247,7 @@ PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
 #' The data is normalized before performing the PCA.
 #'
 #' @param td List of arrays. Training data.
-#' @param nfaces Amount of Eigenfaces
+#' @param nfaces The desired number of eigenfaces.
 #' @return Returns n=1,...,nfaces Eigenfaces.
 #'
 #' @examples

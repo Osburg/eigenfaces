@@ -13,7 +13,7 @@ load_imageset_ef(path, imgDim)
 images.}
 }
 \value{
-Returns dataset as list.
+Returns dataset as \code{imageset_ef} object.
 }
 \description{
 Loads csv-file and saves it as imageset_ef. Imageset_ef will be a list of

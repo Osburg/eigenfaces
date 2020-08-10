@@ -7,14 +7,21 @@
 PCA(td, showEigenvals = TRUE, quick = FALSE)
 }
 \arguments{
-\item{td}{List of arrays, Training data.}
+\item{td}{an object of class 'imageset_ef', training data.}
+
+\item{showEigenvals}{logical vector (TRUE or FALSE).}
+
+\item{quick}{logical vector (TRUE or FALSE).}
 }
 \value{
-Returns eigenvectors of the covariance matrix as image_ef objects
+list of length 1 (when showEigenvals <- FALSE; contains an 'imageset_ef' object consisting of the eigenvectors as 'image_ef' objects) or 2 (when showEigenvals <- TRUE; additionally contains a list of the eigenvalues).
 }
 \description{
 Calculates the data covariance matrix of the original data.
-Returns eigenvectors of the covariance matrix as an image_ef object.
+Returns eigenvectors (and eigenvalues) of the covariance matrix as an 'imageset_ef' object.
+}
+\details{
+
 }
 \examples{
 # Import Olivetti-faces

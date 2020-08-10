@@ -2,24 +2,22 @@
 % Please edit documentation in R/image_ef.R
 \name{image_ef}
 \alias{image_ef}
-\title{Object image_ef}
+\title{Create an image_ef object from x.}
 \usage{
 image_ef(x)
-is.image_ef(x)
 }
 \arguments{
-\item{x}{List of arrays.}
+\item{x}{A matrix or an atomic vector of type numeric.}
 }
 \value{
-Returns image in grayscale.  ##Stimmt das?
+An object of class \code{image_ef} and attribute \code{dim}. Values are taken from x.
+the value of \code{dim} corresponds to the value of \code{dim(x)}. If
+\code{dim} is not set for \code{x}, \code{c(length(x), 1)} is used instead.
 }
 \description{
-Creates objects of class image_ef.
-They are printed as images in grayscale.
-is.image_ef is more a general test of an object being interpretable as an image.
+Create an image_ef object from x.
 }
 \examples{
-##Todo: bessere Beispiele
-image_ef(x)
-is.image_ef(x)
+image_ef(matrix(c(1,2,3,4), nrow=2))
+image_ef(c(1,2,3,4))
 }

@@ -2,23 +2,22 @@
 % Please edit documentation in R/image_ef.R
 \name{normalize.image_ef}
 \alias{normalize.image_ef}
-\title{Normalize of image_ef objects}
+\title{Normalization of an object of class 'image_ef'}
 \usage{
 \method{normalize}{image_ef}(img)
 }
 \arguments{
-\item{img}{an object of class 'image_ef'.}
+\item{img}{An object of class 'image_ef'.}
 }
 \value{
-Returns normalized version of img.
+An object of class 'image_ef'. The pixel values are those of img minus the mean over all pixels of img.
 }
 \description{
-Normalize an image_ef object.
-}
-\details{
-The image is subtracted by the sum of all images divided by their length.
+Subtracts the mean over all pixel from every single pixel and returns the result.
 }
 \examples{
-##Todo: bessere Beispiele
-normalize(img)
+normalize(image_ef(c(1,0,1,0)))
+}
+\references{
+https://www.bytefish.de/pdf/eigenfaces.pdf
 }

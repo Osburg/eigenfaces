@@ -20,6 +20,8 @@ source("R/FeatureSpaceProjection.R")
 #' coeffs2 <- FSP(td[[2]], eigenfaces, avgFace, showCoefficients=TRUE)[[2]]
 #' distance_ef(coeffs1, coeffs2)
 distance_ef <- function(coeffs1, coeffs2) {
+  stopifnot("coeffs1 must be numeric" = is.numeric(coeffs1))
+  stopifnot("coeffs2 must be numeric" = is.numeric(coeffs2))
   stopifnot("Längen der Koeffizientenvektoren müssen übereinstimmen" = length(coeffs1) == length(coeffs2))
 
   #Berechne Differenz
@@ -53,10 +55,16 @@ distance_ef <- function(coeffs1, coeffs2) {
 #'
 #' @export
 classification_ef <- function(img, td, nclosest = 3, neigenfaces = 15, quick = FALSE) {
-  stopifnot("img muss ein image_ef sein" = is.image_ef(img))
-  stopifnot("td muss ein imageset_ef sein" = is.imageset_ef(td))
-  stopifnot("td muss mindestens Länge 1 haben" = length(td)>0)
-  stopifnot("img und Elemente von eigenfaces müssen die gleiche Dimension besitzen" = dim(img) == dim(td[[1]]))
+  stopifnot("img must be of class 'image_ef'" = is.image_ef(img))
+  stopifnot("td must be of class 'imageset_ef'" = is.imageset_ef(td))
+  stopifnot("td must be at least of length 1" = length(td)>0)
+  stopifnot("img und imageset_ef must have the same dimension" = dim(img) == dim(td[[1]]))
+  stopifnot("nclosest must be numeric" = is.numeric(nclosest))
+  stopifnot("nclosest must be of length 1" = length(nclosest)==1)
+  stopifnot("neigenfaces must be numeric" = is.numeric(neigenfaces))
+  stopifnot("neigenfaces must be of length 1" = length(neigenfaces)==1)
+  stopifnot("quick must be logical" = is.logical(quick))
+  stopifnot("quick must be of length 1" = length(quick)==1)
 
   #Berechne Eigenfaces (neigenfaces Stück)
   eigenfaces <- get_eigenfaces(td, nfaces = neigenfaces, quick = quick)

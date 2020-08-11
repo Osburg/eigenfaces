@@ -13,6 +13,9 @@ source("R/image_ef.R")
 #' proj(c(1,1,1), c(1,0,0))
 proj <- function(x,y) {
   stopifnot("x and y must be of the same length" = length(x)==length(y))
+  stopfinot("x must be numeric" = is.numeric(x))
+  stopfinot("y must be numeric" = is.numeric(y))
+
   x <- as.vector(x)
   y <- as.vector(y)
 
@@ -52,10 +55,13 @@ proj <- function(x,y) {
 #'
 #' @export
 FSP.image_ef <- function(img, eigenfaces, avgFace, showCoefficients = FALSE) {
-  stopifnot("eigenfaces muss ein imageset_ef sein" = is.imageset_ef(eigenfaces))
-  stopifnot("eigenfaces muss mindestens die Länge 1 haben" = length(eigenfaces)>0)
-  stopifnot("img muss ein  image_ef sein" = is.image_ef(img))
-  stopifnot("img und Elemente von eigenfaces müssen die gleiche Dimension besitzen" = dim(img) == dim(eigenfaces[[1]]))
+  stopifnot("avgFace must be of class 'iage_ef'" = is.image_ef(avgFace))
+  stopifnot("img must be of class 'image_ef'" = is.image_ef(img))
+  stopifnot("eigen must be of class 'imageset_ef'" = is.imageset_ef(td))
+  stopifnot("td must be at least of length 1" = length(td)>0)
+  stopifnot("img und imageset_ef must have the same dimension" = dim(img) == dim(td[[1]]))
+  stopifnot("showCoefficients must be logical" = is.logical(showCoefficients))
+  stopifnot("showCoefficients must be of length 1" = length(showCoefficients)==1)
 
   #Normalisiere img
   img <- normalize(img)
@@ -103,11 +109,12 @@ FSP.image_ef <- function(img, eigenfaces, avgFace, showCoefficients = FALSE) {
 #'
 #' @export
 FSP.imageset_ef <- function(td, eigenfaces, avgFace, showCoefficients = FALSE) {
-  stopifnot("eigenfaces muss ein imageset_ef sein" = is.imageset_ef(eigenfaces))
-  stopifnot("eigenfaces muss mindestens die Länge 1 haben" = length(eigenfaces)>0)
-  stopifnot("td muss ein  imageset_ef sein" = is.imageset_ef(td))
-  stopifnot("Elemente von td und Elemente von eigenfaces müssen die gleiche Dimension besitzen" = dim(td[[1]]) == dim(eigenfaces[[1]]))
-  stopifnot("td muss mindestens die Länge 1 haben" = length(td)>0)
+  stopifnot("eigenfaces must be of class 'imageset_ef'" = is.imageset_ef(eigenfaces))
+  stopifnot("eigenfaces must be at least of length 1" = length(eigenfaces)>0)
+  stopifnot("td must be of class 'imageset_ef'" = is.imageset_ef(td))
+  stopifnot("td must be at least of length 1" = length(td)>0)
+  stopifnot("showCoefficients must be of length 1" = length(showCoefficients)==1)
+  stopifnot("The elements of td and eigenfaces must be of the same dimension" = dim(td[[1]]) == dim(eigenfaces[[1]]))
 
   if (showCoefficients == FALSE) {
     for (i in 1:length(td)) {

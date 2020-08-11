@@ -29,7 +29,10 @@ image_ef <- function(x) {
 #' @examples
 #' img <- image_ef(matrix(c(1,0,1,0), nrow=2))
 #' @export
-print.image_ef <- function(img) imgShow_ef(img)
+print.image_ef <- function(img) {
+  stopifnot("img must be of class 'image_ef'", is.image_ef(img))
+  imgShow_ef(img)
+}
 
 #' Test if the input is of class 'image_ef'
 #'
@@ -42,7 +45,7 @@ print.image_ef <- function(img) imgShow_ef(img)
 #' noImg <- "a"
 #' is.image_ef(noImg)
 #' @export
-is.image_ef <- function(img) is.element("image_ef", class(img))
+is.image_ef <- function(img) {is.numeric(img) && is.element("image_ef", class(img))}
 
 #' Normalization of an object of class 'image_ef'
 #'

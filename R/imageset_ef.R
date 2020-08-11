@@ -2,7 +2,6 @@ library(tidyverse)
 source("R/helperFunctions_ef.R")
 source("R/image_ef.R")
 
-
 #' Load csv-File and Create Imageset_ef
 #'
 #' Loads csv-file and saves it as imageset_ef. Imageset_ef will be a list of
@@ -19,7 +18,9 @@ source("R/image_ef.R")
 #' # Import Olivetti-faces
 #' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
 load_imageset_ef <- function(path, imgDim) {
-  #TODO: Baue Funktion ein, um Farbbilder zu laden
+  stopifnot("imgDim must be numeric" = is.numeric(imgDim))
+  stopifnot("imgDim must be of length 2" = length(imgDim)==2)
+  stopifnot("imgDim must be atomic" = is.atomic(imgDim))
 
   #Lese Daten ein und speichere sie als [n_img, imgDim]-Array
   data  <- read.csv(path, header=FALSE)
@@ -50,7 +51,6 @@ load_imageset_ef <- function(path, imgDim) {
 #' @examples
 #' # Load classes of Olivetti-Dataset
 #' classes <- load_classes_ef("olivetti_y.csv")
-
 load_classes_ef <- function(path, header=FALSE) {
   data <- read.csv(path)
   data
@@ -67,15 +67,19 @@ load_classes_ef <- function(path, header=FALSE) {
 #' normalize(td)
 #' @export
 imageset_ef <- function(lst) {
-  stopifnot("Eingabe muss eine Liste sein" = is.list(lst))
-  stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(lst)>0)
-
-  #TODO: teste, ob alle image_ef Objekte die gleiche imgDim haben
-  #TODO: Gibt allen Einträgen der Liste die gleiche Dimension imgDim <- neuer Parameter der Funktion
+  stopifnot("lst must be a list" = is.list(lst))
+  stopifnot("lst must be at least of length 1" = length(lst)>0)
+  stopifnot("lst must be numeric" = is.numeric(lst))
 
   #Wandelt Listenelemente in image_ef Objekte um
   for (i in 1:length(lst)) {
     lst[[i]] <- image_ef(lst[[i]])
+  }
+
+  #Teste, ob alle image_ef Objekte die gleiche Dimension haben
+  testdim <- dim(lst[[1]])
+  for (i in 1:length(lst)) {
+    stopifnot("dimension must be the same for all images" = dim(lst[[i]]) == testdim)
   }
 
   #Erzeugt Klassenattribut
@@ -96,10 +100,22 @@ imageset_ef <- function(lst) {
 #'
 #' is.imageset_ef(c(1,2,3,4))
 #' @export
-is.imageset_ef <- function(td) is.element("imageset_ef", class(td))
+is.imageset_ef <- function(td) {
+  if (is.element("imageset_ef", class(td)) && is.list(td))
+    if (length(td) == 0) return(TRUE)
+    else {
+      for (i in 1:length(td)) {
+        if (is.image_ef(td[[i]])==FALSE) return(FALSE)
+        else {
+          if (!identical(dim(td[[i]]), dim(td[[1]]))) return(FALSE)
+        }
+      }
+      return(TRUE)
+    }
+  else return(FALSE)
+}
 
-
-#' Normalize
+#' Normalization of an imageset_ef
 #'
 #' Normalizes all entries in the imageset_ef list.
 #'
@@ -113,15 +129,14 @@ is.imageset_ef <- function(td) is.element("imageset_ef", class(td))
 #' # Normalize
 #' normalize(td)
 normalize.imageset_ef <- function(td) {
-  stopifnot("Eingabe muss ein imageset_ef sein" = is.imageset_ef(td))
-  stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>0)
+  stopifnot("td must be of class 'imageset_ef'" = is.imageset_ef(td))
+  stopifnot("td must be at least of length 1" = length(td)>0)
 
   for (i in 1:length(td)) {
     td[[i]] <- normalize(td[[i]])
   }
   td
 }
-
 
 #' Calculate Average Face
 #'
@@ -138,8 +153,8 @@ normalize.imageset_ef <- function(td) {
 #' # Get average face
 #' avg_face(td)
 avg_face <- function(td) {
-  stopifnot("Eingabe muss ein imageset_ef sein" = is.imageset_ef(td))
-  stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>0)
+  stopifnot("td must be of class 'imageset_ef'" = is.imageset_ef(td))
+  stopifnot("td must be at least of length 1" = length(td)>0)
 
   avg <- 0
   for (i in 1:length(td)){
@@ -166,8 +181,8 @@ avg_face <- function(td) {
 #' # Subtract
 #' subtract_avg_face(td)
 subtract_avg_face <- function(td) {
-  stopifnot("Eingabe muss ein imageset_ef sein" = is.imageset_ef(td))
-  stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>0)
+  stopifnot("td must be of class 'imageset_ef'" = is.imageset_ef(td))
+  stopifnot("td must be at least of length 1" = length(td)>0)
 
   #Berechne Durchschnittsgesicht
   avg <- avg_face(td)
@@ -201,8 +216,12 @@ subtract_avg_face <- function(td) {
 #' instead of the covariance matrix. However, this causes that only a subset of the eigenvectors of the covariance matrix is returned.
 #' If quick is set TRUE, this option is activated.
 PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
-  stopifnot("Eingabe muss ein imageset_ef sein" = is.imageset_ef(td))
-  stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>0)
+  stopifnot("td must be of class 'imageset_ef'" = is.imageset_ef(td))
+  stopifnot("td must be at least of length 1" = length(td)>0)
+  stopifnot("showEigenvals must be logical" = is.logical(showEigenvals))
+  stopifnot("showEigenvals must be of length 1" = length(showEigenvals)==1)
+  stopifnot("quick must be logical" = is.logical(quick))
+  stopifnot("quick must be of length 1" = length(quick)==1)
 
   #Überführe td in eine Gesichtsmatrix A
   ncol <- length(td)
@@ -266,8 +285,12 @@ PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
 #' @references Marinovsky F., Wagner P., Gesichtserkennung mit Eigenfaces, FH Zittau/Görlitz
 #' @export
 get_eigenfaces <- function(td, nfaces = 15, quick = FALSE) {
-  stopifnot("Eingabe muss ein imageset_ef sein" = is.imageset_ef(td))
-  stopifnot("Eingabe muss mindestens die Länge 1 haben" = length(td)>0)
+  stopifnot("td must be of class 'imageset_ef'" = is.imageset_ef(td))
+  stopifnot("td must be at least of length 1" = length(td)>0)
+  stopifnot("nfaces must be numeric" = is.numeric(15))
+  stopifnot("nfaces must be of length 1" = length(nfaces)==1)
+  stopifnot("quick must be logical" = is.logical(quick))
+  stopifnot("quick must be of length 1" = length(quick)==1)
 
   #Normalisiere die Eigengesichter und ziehe das Durchschnittsgesicht ab
   td %>% normalize() %>% subtract_avg_face() -> td

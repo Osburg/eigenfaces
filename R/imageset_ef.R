@@ -22,7 +22,7 @@ load_imageset_ef <- function(path, imgDim) {
   #TODO: Baue Funktion ein, um Farbbilder zu laden
 
   #Lese Daten ein und speichere sie als [n_img, imgDim]-Array
-  data  <- read.csv(path)
+  data  <- read.csv(path,header=FALSE)
   nrow <- nrow(data)
   data %>% as.matrix() %>% as.double() %>% as.matrix() -> data
   dim(data) <- c(nrow, imgDim)
@@ -52,7 +52,7 @@ load_imageset_ef <- function(path, imgDim) {
 #' # Load classes of Olivetti-Dataset
 #' classes <- load_classes_ef("olivetti_y.csv")
 load_classes_ef <- function(path) {
-  data <- read.csv(path)
+  data <- read.csv(path,header=FALSE)
   data
 }
 

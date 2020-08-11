@@ -4,7 +4,6 @@
 #Importiere benötigte Libraries
 library(tidyverse)
 
-
 #Gibt eine Matrix img als Bild in Graustufen (und nicht auf dem Kopf wie image()) aus
 #TODO: ?-Eintrag
 #TODO: Test

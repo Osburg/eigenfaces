@@ -4,7 +4,6 @@ source("R/imageset_ef.R")
 source("R/image_ef.R")
 source("R/FeatureSpaceProjection.R")
 
-
 #' Euclidean distance between the coefficient vectors of the projection of two images
 #'
 #' @param coeffs1 numeric vector, first coefficient vector

@@ -1,6 +1,7 @@
 library(tidyverse)
 source("R/helperFunctions_ef.R")
 
+
 #' Create an image_ef object from x.
 #'
 #' @param x A matrix or an atomic vector of type numeric.

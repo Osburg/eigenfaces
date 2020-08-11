@@ -2,7 +2,6 @@ library(tidyverse)
 source("R/helperFunctions_ef.R")
 source("R/image_ef.R")
 
-
 #' Load csv-File and Create Imageset_ef
 #'
 #' Loads csv-file and saves it as imageset_ef. Imageset_ef will be a list of

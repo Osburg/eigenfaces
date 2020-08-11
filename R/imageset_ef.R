@@ -22,8 +22,8 @@ load_imageset_ef <- function(path, imgDim) {
   #TODO: Baue Funktion ein, um Farbbilder zu laden
 
   #Lese Daten ein und speichere sie als [n_img, imgDim]-Array
-  data  <- read.csv(path,header=FALSE)
-  nrow <- nrow(data)
+  data  <- read.csv(path, header=FALSE)
+      nrow <- nrow(data)
   data %>% as.matrix() %>% as.double() %>% as.matrix() -> data
   dim(data) <- c(nrow, imgDim)
 
@@ -36,7 +36,6 @@ load_imageset_ef <- function(path, imgDim) {
 
   td
 }
-
 
 #' Load csv-File and Create Array
 #'
@@ -51,8 +50,9 @@ load_imageset_ef <- function(path, imgDim) {
 #' @examples
 #' # Load classes of Olivetti-Dataset
 #' classes <- load_classes_ef("olivetti_y.csv")
-load_classes_ef <- function(path) {
-  data <- read.csv(path,header=FALSE)
+
+load_classes_ef <- function(path, header=FALSE) {
+  data <- read.csv(path)
   data
 }
 
@@ -84,7 +84,18 @@ imageset_ef <- function(lst) {
   lst
 }
 
-#Testet, ob eine Eingabe von der Klasse imageset_ef_ef ist
+#' Tests if an object is of class 'imageset_ef'
+#'
+#' @param td An object to be tested
+#' @return logical vector of legnth 1, (TRUE or FALSE)
+#' @examples
+#' # Import Olivetti-faces
+#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+#' # Test
+#' is.imageset_ef(td)
+#'
+#' is.imageset_ef(c(1,2,3,4))
+#' @export
 is.imageset_ef <- function(td) is.element("imageset_ef", class(td))
 
 
@@ -239,8 +250,6 @@ PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
   else return(list(eigenfaces))
 }
 
-#Berechnet die Eigenwerte und Vektoren zur Kovarianzmatrix
-
 #' Calculate the eigenvectors and eigenvalues of the covariance matrix
 #'
 #' Makes use of the PCA function to perform the principle component analysis.
@@ -253,7 +262,7 @@ PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
 #' @examples
 #' # Import Olivetti-faces
 #' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
-#'get_eigenfaces(td, 9)
+#' get_eigenfaces(td, 9)
 #' @references Marinovsky F., Wagner P., Gesichtserkennung mit Eigenfaces, FH Zittau/Görlitz
 #' @export
 get_eigenfaces <- function(td, nfaces = 15, quick = FALSE) {

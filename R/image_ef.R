@@ -20,7 +20,7 @@ image_ef <- function(x) {
   class(x) <- "image_ef"
   x
 }
-?print
+
 #' Show an image_ef object as image in the plots section
 #'
 #' An implementation of the \code{print} function for 'image_ef' objects.
@@ -28,6 +28,7 @@ image_ef <- function(x) {
 #' @param img An image_ef object.
 #' @examples
 #' img <- image_ef(matrix(c(1,0,1,0), nrow=2))
+#' @export
 print.image_ef <- function(img) imgShow_ef(img)
 
 #' Test if the input is of class 'image_ef'
@@ -42,7 +43,6 @@ print.image_ef <- function(img) imgShow_ef(img)
 #' is.image_ef(noImg)
 #' @export
 is.image_ef <- function(img) is.element("image_ef", class(img))
-
 
 #' Normalization of an object of class 'image_ef'
 #'

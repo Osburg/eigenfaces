@@ -1,4 +1,4 @@
-#Beschreibung: In dieser Datei werden Funktionen definiert, die im Hintergrund ablaufen
+  #Beschreibung: In dieser Datei werden Funktionen definiert, die im Hintergrund ablaufen
 #und einem das Leben erleichtern sollen.
 
 #Importiere benötigte Libraries
@@ -12,7 +12,7 @@ imgShow_ef <- function(img) {
   img %>%
     apply(1, rev) %>%
     t() %>%
-    image(,col=hcl.colors(12, "Grays", rev = FALSE))
+    image(col=hcl.colors(12, "Grays", rev = FALSE))
 }
 
 #Liest eine .csv-Datei der folgenden Struktur ein und gibt sie als n x dimension - Array wieder aus
@@ -44,5 +44,10 @@ to_png <- function(obj) UseMethod("to_csv")
 #Generische Funktion zum Normalisieren von image_ef, imageset_ef Objekten
 normalize <- function(obj) UseMethod("normalize")
 
-#Generische Funktion zur Projektion in den feature space
+  #Generische Funktion zur Projektion in den feature space
+#' Feature Space Projection
+#'
+#' Projects an image or set of images into feature space defined by a set of eigenfaces
+#'
+#' For details see FSP.image_ef and FSP.imageset_ef
 FSP <- function(obj, eigenfaces, avgFace, showCoefficients = TRUE) UseMethod("FSP", obj)

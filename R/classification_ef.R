@@ -44,6 +44,14 @@ distance_ef <- function(coeffs1, coeffs2) {
 #' @param quick logical vector of length  (TRUE or FALSE), see \code{PCA}
 #'
 #' @return 'imageset_ef' object containing the \code{nclosest} images from \code{td}, which are 'closest' to \code{img}
+#'
+#' @examples
+#' # Import Olivetti-faces
+#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+#' img <- td[[1]]
+#' closest <- classification_ef(img, td)
+#'
+#' @export
 classification_ef <- function(img, td, nclosest = 3, neigenfaces = 15, quick = FALSE) {
   stopifnot("img muss ein image_ef sein" = is.image_ef(img))
   stopifnot("td muss ein imageset_ef sein" = is.imageset_ef(td))

@@ -2,7 +2,7 @@
 % Please edit documentation in R/imageset_ef.R
 \name{normalize.imageset_ef}
 \alias{normalize.imageset_ef}
-\title{Normalize}
+\title{Normalization of an imageset_ef}
 \usage{
 \method{normalize}{imageset_ef}(td)
 }

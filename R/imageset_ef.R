@@ -69,7 +69,7 @@ load_classes_ef <- function(path, header=FALSE) {
 imageset_ef <- function(lst) {
   stopifnot("lst must be a list" = is.list(lst))
   stopifnot("lst must be at least of length 1" = length(lst)>0)
-  stopifnot("lst must be numeric" = is.numeric(lst))
+  #stopifnot("lst must be numeric" = is.numeric(lst))
 
   #Wandelt Listenelemente in image_ef Objekte um
   for (i in 1:length(lst)) {
@@ -296,7 +296,7 @@ get_eigenfaces <- function(td, nfaces = 15, quick = FALSE) {
   td %>% normalize() %>% subtract_avg_face() -> td
 
   #Führe die Hauptkomponentenanalyse durch und entnehmen nur die ersten nfaces Eigenfaces
-  lst <- PCA(td, showEigenvals = FALSE, quick = quick)
+  lst <- PCA(td, showEigenvals = FALSE, quick = TRUE) #ansonsten Fehlermeldung is.logical(quick)
   eigenfaces <- lst[[1]]
   nfaces <- min(nfaces, length(eigenfaces))
   eigenfaces <- eigenfaces[1:nfaces]

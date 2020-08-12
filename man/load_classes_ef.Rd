@@ -4,7 +4,7 @@
 \alias{load_classes_ef}
 \title{Load csv-File and Create Array}
 \usage{
-load_classes_ef(path)
+load_classes_ef(path, header = FALSE)
 }
 \arguments{
 \item{path}{Path to dataset. Needs to be in csv-format.}

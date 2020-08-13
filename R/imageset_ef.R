@@ -69,7 +69,7 @@ load_classes_ef <- function(path, header=FALSE) {
 imageset_ef <- function(lst) {
   stopifnot("lst must be a list" = is.list(lst))
   stopifnot("lst must be at least of length 1" = length(lst)>0)
-  #stopifnot("lst must be numeric" = is.numeric(lst))
+  stopifnot("lst must be numeric" = all(sapply(lst, is.numeric)))
 
   #Wandelt Listenelemente in image_ef Objekte um
   for (i in 1:length(lst)) {
@@ -285,6 +285,7 @@ PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
 #' @references Marinovsky F., Wagner P., Gesichtserkennung mit Eigenfaces, FH Zittau/Görlitz
 #' @export
 get_eigenfaces <- function(td, nfaces = 15, quick = FALSE) {
+  force(quick)
   stopifnot("td must be of class 'imageset_ef'" = is.imageset_ef(td))
   stopifnot("td must be at least of length 1" = length(td)>0)
   stopifnot("nfaces must be numeric" = is.numeric(15))
@@ -296,11 +297,10 @@ get_eigenfaces <- function(td, nfaces = 15, quick = FALSE) {
   td %>% normalize() %>% subtract_avg_face() -> td
 
   #Führe die Hauptkomponentenanalyse durch und entnehmen nur die ersten nfaces Eigenfaces
-  lst <- PCA(td, showEigenvals = FALSE, quick = TRUE) #ansonsten Fehlermeldung is.logical(quick)
+  lst <- PCA(td, showEigenvals = FALSE, quick)
   eigenfaces <- lst[[1]]
   nfaces <- min(nfaces, length(eigenfaces))
   eigenfaces <- eigenfaces[1:nfaces]
 
   imageset_ef(eigenfaces)
 }
-

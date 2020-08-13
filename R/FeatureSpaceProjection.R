@@ -13,8 +13,8 @@ source("R/image_ef.R")
 #' proj(c(1,1,1), c(1,0,0))
 proj <- function(x,y) {
   stopifnot("x and y must be of the same length" = length(x)==length(y))
-  stopfinot("x must be numeric" = is.numeric(x))
-  stopfinot("y must be numeric" = is.numeric(y))
+  stopifnot("x must be numeric" = is.numeric(x))
+  stopifnot("y must be numeric" = is.numeric(y))
 
   x <- as.vector(x)
   y <- as.vector(y)
@@ -133,4 +133,3 @@ FSP.imageset_ef <- function(td, eigenfaces, avgFace, showCoefficients = FALSE) {
     return(list(td, coeffs))
   }
 }
-

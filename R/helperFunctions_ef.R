@@ -1,6 +1,3 @@
-#Beschreibung: In dieser Datei werden Funktionen definiert, die im Hintergrund ablaufen
-#und einem das Leben erleichtern sollen.
-
 #Importiere benötigte Libraries
 library(tidyverse)
 

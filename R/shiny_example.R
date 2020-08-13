@@ -1,9 +1,9 @@
-library(shiny)
-library(tidyverse)
- #source("R/helperFunctions_ef.R")
- #source("R/imageset_ef.R")
- #source("R/image_ef.R")
- #source("R/FeatureSpaceProjection.R")
+#library(shiny)
+#library(tidyverse)
+source("R/helperFunctions_ef.R")
+source("R/imageset_ef.R")
+source("R/image_ef.R")
+source("R/FeatureSpaceProjection.R")
  #  source("R/visualize_ef.R")
 
 # Wie man Plots einfügt, habe ich mit einem # auskommentiert, bei renderPlot({ steht die Plot Funktionen drinnen })
@@ -36,7 +36,7 @@ ui <-fluidPage(
 server <-function(input, output) {
   output$t <-renderText(input$g)
   output$plot <-renderPlot({
-    td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
+    td <- load_imageset_ef("olivetti_X.csv", c(64,64))
     imgShow_ef(td[[2]])
     ef <- get_eigenfaces(td, input$eig)
     #x <- reactive({
@@ -47,7 +47,7 @@ server <-function(input, output) {
     #FSP(td[[1]], ef, avg_face(normalize(td)))
     imgShow_ef(td[[input$person]])
   output$plot2 <-renderPlot({
-    td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
+    td <- load_imageset_ef("olivetti_X.csv", c(64,64))
     ef <- get_eigenfaces(td, input$eig)
     #x <- reactive({
      # as.numeric(input$text1)
@@ -63,4 +63,8 @@ server <-function(input, output) {
 }
 ?renderPlot
 ?plotOutput
-shinyApp(ui, server)
+#' @export
+shiny_App <- function(){
+  shinyApp(ui, server)
+}
+#shinyApp(ui, server)

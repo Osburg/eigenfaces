@@ -51,8 +51,8 @@ load_imageset_ef <- function(path, imgDim) {
 #' @examples
 #' # Load classes of Olivetti-Dataset
 #' classes <- load_classes_ef("../olivetti_y.csv")
-load_classes_ef <- function(path, header=FALSE) {
-  data <- read.csv(path)
+load_classes_ef <- function(path) {
+  data <- read.csv(path, header=FALSE)
   data
 }
 

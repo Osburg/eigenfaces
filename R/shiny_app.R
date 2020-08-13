@@ -1,0 +1,103 @@
+# Shiny
+
+library(shiny)
+source("R/helperFunctions_ef.R")
+source("R/imageset_ef.R")
+source("R/image_ef.R")
+source("R/FeatureSpaceProjection.R")
+
+# Define UI for app that draws outputs and sliders ----
+ui <- fluidPage(
+
+  # App title ----
+  titlePanel("Visualize Eigenfaces"),
+
+  # Sidebar layout with input and output definitions ----
+  sidebarLayout(
+
+    # Sidebar panel for inputs ----
+    sidebarPanel(
+
+      # Input: Slider for the number of person ----
+      sliderInput(inputId = "person",
+                  label = "Number of Person:",
+                  min = 1,
+                  max = 40,
+                  value = 30),
+
+      # Input: Slider for the perspective of person ----
+      sliderInput(inputId = "perspective",
+                  label = "Perspective of Person:",
+                  min = 1,
+                  max = 10,
+                  value = 2),
+
+      # Input: Slider for the nr of used ef to reconstruct ----
+      sliderInput(inputId = "n_recon",
+                  label = "Amount of Eigenfaces used for Reconstruction:",
+                  min = 1,
+                  max = 400,
+                  value = 50),
+
+      # Input: Slider for the eigenface number ----
+      sliderInput(inputId = "n_eigen",
+                  label = "Eigenface number:",
+                  min = 1,
+                  max = 100,
+                  value = 1)
+
+    ),
+
+
+    # Main panel for displaying outputs ----
+    mainPanel(
+
+      # Output:
+      h3("Original and Reconstructed Face"),
+      fluidRow(splitLayout(style = "border: 1px solid silver:", cellWidths = c(200,200),
+                           plotOutput(outputId = "face", width = 200, height =200),
+                           plotOutput(outputId = "reconstruction", width = 200, height =200))),
+      h3("Eigenface"),
+      plotOutput(outputId = "eigenface", width = 200, height = 200)
+
+    )
+  )
+)
+
+
+###############
+
+
+# Define server logic required to draw plots ----
+server <- function(input, output) {
+
+  output$face <- renderPlot({
+    par(mar = c(0,0,0,0))
+    td[[input$person*10 + input$perspective]]
+  })
+
+  output$eigenface <- renderPlot({
+    par(mar = c(0,0,0,0))
+    ef[[input$n_eigen]]
+  })
+
+  output$reconstruction <- renderPlot({
+    par(mar = c(0,0,0,0))
+    FSP(td[[input$person*10 + input$perspective]],
+        ef[1:input$n_recon], avg_face(normalize(td)))
+  })
+
+}
+
+
+##########
+
+# BEFORE USING SHINY APP THIS NEEDS TO BE RUN
+td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+ef <- get_eigenfaces(td, 400, quick = FALSE)
+
+td <- load_imageset_mnist("mnist_test.csv", c(28,28))
+ef <- get_eigenfaces(td, 400, quick = FALSE)
+
+# Acutally opening the shiny app
+shinyApp(ui = ui, server = server)

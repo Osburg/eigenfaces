@@ -1,6 +1,6 @@
 #library(tidyverse)
-#source("R/helperFunctions_ef.R")
-#source("R/image_ef.R")
+source("R/helperFunctions_ef.R")
+source("R/image_ef.R")
 
 #' Load csv-File and Create Imageset_ef
 #'
@@ -16,7 +16,7 @@
 #'
 #' @examples
 #' # Import Olivetti-faces
-#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+#' td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
 load_imageset_ef <- function(path, imgDim) {
   stopifnot("imgDim must be numeric" = is.numeric(imgDim))
   stopifnot("imgDim must be of length 2" = length(imgDim)==2)
@@ -33,7 +33,7 @@ load_imageset_ef <- function(path, imgDim) {
   class(td) <- "imageset_ef"
 
   #Füge die image_ef Objekte in das imageset_ef Objekt ein
-  for (i in 1:dim(data)[1]) td[[i]] <- eigenfaces::image_ef(data[i,,])
+  for (i in 1:dim(data)[1]) td[[i]] <- image_ef(data[i,,])
 
   td
 }
@@ -50,7 +50,7 @@ load_imageset_ef <- function(path, imgDim) {
 #'
 #' @examples
 #' # Load classes of Olivetti-Dataset
-#' classes <- load_classes_ef("olivetti_y.csv")
+#' classes <- load_classes_ef("../olivetti_y.csv")
 load_classes_ef <- function(path, header=FALSE) {
   data <- read.csv(path)
   data
@@ -62,7 +62,7 @@ load_classes_ef <- function(path, header=FALSE) {
 #' @return object of class 'imageset_ef',a list consisting of objects of class 'image_ef'.
 #' @examples
 #' # Import Olivetti-faces
-#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+#' td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
 #' # Normalize
 #' normalize(td)
 #' @export
@@ -73,7 +73,7 @@ imageset_ef <- function(lst) {
 
   #Wandelt Listenelemente in image_ef Objekte um
   for (i in 1:length(lst)) {
-    lst[[i]] <- eigenfaces::image_ef(lst[[i]])
+    lst[[i]] <- image_ef(lst[[i]])
   }
 
   #Teste, ob alle image_ef Objekte die gleiche Dimension haben
@@ -94,7 +94,7 @@ imageset_ef <- function(lst) {
 #' @return logical vector of legnth 1, (TRUE or FALSE)
 #' @examples
 #' # Import Olivetti-faces
-#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+#' td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
 #' # Test
 #' is.imageset_ef(td)
 #'
@@ -105,7 +105,7 @@ is.imageset_ef <- function(td) {
     if (length(td) == 0) return(TRUE)
     else {
       for (i in 1:length(td)) {
-        if (eigenfaces::is.image_ef(td[[i]])==FALSE) return(FALSE)
+        if (is.image_ef(td[[i]])==FALSE) return(FALSE)
         else {
           if (!identical(dim(td[[i]]), dim(td[[1]]))) return(FALSE)
         }
@@ -125,7 +125,7 @@ is.imageset_ef <- function(td) {
 #'
 #' @examples
 #' # Import Olivetti-faces
-#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+#' td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
 #' # Normalize
 #' normalize(td)
 normalize.imageset_ef <- function(td) {
@@ -133,7 +133,7 @@ normalize.imageset_ef <- function(td) {
   stopifnot("td must be at least of length 1" = length(td)>0)
 
   for (i in 1:length(td)) {
-    td[[i]] <- eigenfaces::normalize(td[[i]])
+    td[[i]] <- normalize(td[[i]])
   }
   td
 }
@@ -149,7 +149,7 @@ normalize.imageset_ef <- function(td) {
 #'
 #' @examples
 #' # Import Olivetti-faces
-#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+#' td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
 #' # Get average face
 #' avg_face(td)
 avg_face <- function(td) {
@@ -177,7 +177,7 @@ avg_face <- function(td) {
 #'
 #' @examples
 #' # Import Olivetti-faces
-#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+#' td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
 #' # Subtract
 #' subtract_avg_face(td)
 subtract_avg_face <- function(td) {
@@ -208,7 +208,7 @@ subtract_avg_face <- function(td) {
 #'
 #' @examples
 #' # Import Olivetti-faces
-#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+#' td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
 #' PCA(td, showEigenvals = FALSE, quick = quick)
 #' @details \code{td} is the 'imageset_ef'-object where the images are saved as 'image_ef' objects. \code{showEigenvals} determins
 #' whether the eigenvalues are returned in addition to the eigenvectors (FALSE means only the eigenvectors are returned).
@@ -260,7 +260,7 @@ PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
   for (i in 1:ncol(eigenvects)) {
     eigenface <- eigenvects[,i]
     dim(eigenface) <- imgDim
-    eigenfaces[[i]] <- eigenfaces::image_ef(eigenface)
+    eigenfaces[[i]] <- image_ef(eigenface)
   }
 
   eigenfaces <- imageset_ef(eigenfaces)
@@ -280,7 +280,7 @@ PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
 #'
 #' @examples
 #' # Import Olivetti-faces
-#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+#' td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
 #' get_eigenfaces(td, 9)
 #' @references Marinovsky F., Wagner P., Gesichtserkennung mit Eigenfaces, FH Zittau/Görlitz
 #' @export

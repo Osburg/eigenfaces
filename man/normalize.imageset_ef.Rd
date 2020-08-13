@@ -17,7 +17,7 @@ Normalizes all entries in the imageset_ef list.
 }
 \examples{
 # Import Olivetti-faces
-td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
 # Normalize
 normalize(td)
 }

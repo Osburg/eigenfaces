@@ -21,5 +21,5 @@ multiple imgDim x imgDim arrays.
 }
 \examples{
 # Import Olivetti-faces
-td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
 }

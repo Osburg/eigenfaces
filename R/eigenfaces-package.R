@@ -10,4 +10,5 @@
 ## usethis namespace: end
 #' @import tidyverse
 #' @import pracma
+#' @import shiny
 NULL

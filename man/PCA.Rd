@@ -25,7 +25,7 @@ Returns eigenvectors (and eigenvalues) of the covariance matrix as an 'imageset_
 }
 \examples{
 # Import Olivetti-faces
-td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
 PCA(td, showEigenvals = FALSE, quick = quick)
 }
 \references{

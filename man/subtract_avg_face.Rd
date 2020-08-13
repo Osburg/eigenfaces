@@ -18,7 +18,7 @@ of a given data set.
 }
 \examples{
 # Import Olivetti-faces
-td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
 # Subtract
 subtract_avg_face(td)
 }

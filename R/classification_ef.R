@@ -1,8 +1,8 @@
 #library(tidyverse)
-#source("R/helperFunctions_ef.R")
-#source("R/imageset_ef.R")
-#source("R/image_ef.R")
-#source("R/FeatureSpaceProjection.R")
+source("R/helperFunctions_ef.R")
+source("R/imageset_ef.R")
+source("R/image_ef.R")
+source("R/FeatureSpaceProjection.R")
 
 #' Euclidean distance between the coefficient vectors of the projection of two images
 #'
@@ -12,7 +12,7 @@
 #' @return numeric vector of length 1, the euclidean distance of \code{coeffs1} and \code{coeffs2}
 #' @examples
 #' # Import Olivetti-faces
-#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+#' td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
 #' #compute coefficients
 #' eigenfaces <- get_eigenfaces(td, nfaces = 50)
 #' avgFace <- avg_face(td)
@@ -49,14 +49,14 @@ distance_ef <- function(coeffs1, coeffs2) {
 #'
 #' @examples
 #' # Import Olivetti-faces
-#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+#' td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
 #' img <- td[[1]]
 #' closest <- classification_ef(img, td)
 #'
 #' @export
 classification_ef <- function(img, td, nclosest = 3, neigenfaces = 15, quick = FALSE) {
-  stopifnot("img must be of class 'image_ef'" = eigenfaces::is.image_ef(img))
-  stopifnot("td must be of class 'imageset_ef'" = eigenfaces::is.imageset_ef(td))
+  stopifnot("img must be of class 'image_ef'" = is.image_ef(img))
+  stopifnot("td must be of class 'imageset_ef'" = is.imageset_ef(td))
   stopifnot("td must be at least of length 1" = length(td)>0)
   stopifnot("img und imageset_ef must have the same dimension" = dim(img) == dim(td[[1]]))
   stopifnot("nclosest must be numeric" = is.numeric(nclosest))
@@ -67,13 +67,13 @@ classification_ef <- function(img, td, nclosest = 3, neigenfaces = 15, quick = F
   stopifnot("quick must be of length 1" = length(quick)==1)
 
   #Berechne Eigenfaces (neigenfaces Stück)
-  eigenfaces <- eigenfaces::get_eigenfaces(td, nfaces = neigenfaces, quick = quick)
-  avgFace <- eigenfaces::avg_face(eigenfaces::normalize(td))
+  eigenfaces <- get_eigenfaces(td, nfaces = neigenfaces, quick = quick)
+  avgFace <- avg_face(normalize(td))
 
   #Berechne Projektionen
-  imgProj <- eigenfaces::FSP(img, eigenfaces, avgFace, showCoefficients = TRUE)
+  imgProj <- FSP(img, eigenfaces, avgFace, showCoefficients = TRUE)
 
-  tdProj <- eigenfaces::FSP(td, eigenfaces, avgFace, showCoefficients = TRUE)
+  tdProj <- FSP(td, eigenfaces, avgFace, showCoefficients = TRUE)
 
   #Berechne Distanzen
   dist <- c()
@@ -95,7 +95,7 @@ classification_ef <- function(img, td, nclosest = 3, neigenfaces = 15, quick = F
   nclosest <- min(nclosest, length(td))
   td <- tb[["images_ef"]][1:nclosest]
 
-  eigenfaces::imageset_ef(td)
+  imageset_ef(td)
 }
 
 

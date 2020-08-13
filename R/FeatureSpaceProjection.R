@@ -1,8 +1,8 @@
 #library(tidyverse)
 #library(pracma)
-#source("R/helperFunctions_ef.R")
-#source("R/imageset_ef.R")
-#source("R/image_ef.R")
+source("R/helperFunctions_ef.R")
+source("R/imageset_ef.R")
+source("R/image_ef.R")
 
 #' Projection of a vector onto a unit vector
 #'
@@ -55,16 +55,16 @@ proj <- function(x,y) {
 #'
 #' @export
 FSP.image_ef <- function(img, eigenfaces, avgFace, showCoefficients = FALSE) {
-  stopifnot("avgFace must be of class 'iage_ef'" = eigenfaces::is.image_ef(avgFace))
-  stopifnot("img must be of class 'image_ef'" = eigenfaces::is.image_ef(img))
-  stopifnot("eigen must be of class 'imageset_ef'" = eigenfaces::is.imageset_ef(td))
+  stopifnot("avgFace must be of class 'iage_ef'" = is.image_ef(avgFace))
+  stopifnot("img must be of class 'image_ef'" = is.image_ef(img))
+  stopifnot("eigen must be of class 'imageset_ef'" = is.imageset_ef(td))
   stopifnot("td must be at least of length 1" = length(td)>0)
   stopifnot("img und imageset_ef must have the same dimension" = dim(img) == dim(td[[1]]))
   stopifnot("showCoefficients must be logical" = is.logical(showCoefficients))
   stopifnot("showCoefficients must be of length 1" = length(showCoefficients)==1)
 
   #Normalisiere img
-  img <- eigenfaces::normalize(img)
+  img <- normalize(img)
 
   #Ziehe Durchschnittsgesicht ab
   img <- img - avgFace
@@ -101,7 +101,7 @@ FSP.image_ef <- function(img, eigenfaces, avgFace, showCoefficients = FALSE) {
 #'
 #' @examples
 #' # Import Olivetti-faces
-#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+#' td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
 #' eigenfaces <- get_eigenfaces(td, nfaces = 50)
 #' avgFace <- avg_face(td)
 #'
@@ -109,9 +109,9 @@ FSP.image_ef <- function(img, eigenfaces, avgFace, showCoefficients = FALSE) {
 #'
 #' @export
 FSP.imageset_ef <- function(td, eigenfaces, avgFace, showCoefficients = FALSE) {
-  stopifnot("eigenfaces must be of class 'imageset_ef'" = eigenfaces::is.imageset_ef(eigenfaces))
+  stopifnot("eigenfaces must be of class 'imageset_ef'" = is.imageset_ef(eigenfaces))
   stopifnot("eigenfaces must be at least of length 1" = length(eigenfaces)>0)
-  stopifnot("td must be of class 'imageset_ef'" = eigenfaces::is.imageset_ef(td))
+  stopifnot("td must be of class 'imageset_ef'" = is.imageset_ef(td))
   stopifnot("td must be at least of length 1" = length(td)>0)
   stopifnot("showCoefficients must be of length 1" = length(showCoefficients)==1)
   stopifnot("The elements of td and eigenfaces must be of the same dimension" = dim(td[[1]]) == dim(eigenfaces[[1]]))

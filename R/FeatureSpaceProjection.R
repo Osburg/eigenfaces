@@ -133,4 +133,3 @@ FSP.imageset_ef <- function(td, eigenfaces, avgFace, showCoefficients = FALSE) {
     return(list(td, coeffs))
   }
 }
-

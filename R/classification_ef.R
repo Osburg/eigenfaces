@@ -22,7 +22,7 @@ source("R/FeatureSpaceProjection.R")
 distance_ef <- function(coeffs1, coeffs2) {
   stopifnot("coeffs1 must be numeric" = is.numeric(coeffs1))
   stopifnot("coeffs2 must be numeric" = is.numeric(coeffs2))
-  stopifnot("Längen der Koeffizientenvektoren müssen übereinstimmen" = length(coeffs1) == length(coeffs2))
+  stopifnot("Length of coeffs1 and coeffs 2 must be equal" = length(coeffs1) == length(coeffs2))
 
   #Berechne Differenz
   diff = coeffs1 - coeffs2
@@ -97,5 +97,3 @@ classification_ef <- function(img, td, nclosest = 3, neigenfaces = 15, quick = F
 
   imageset_ef(td)
 }
-
-

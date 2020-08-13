@@ -1,10 +1,9 @@
 # Temporary file
 
-# Todo: Read-in different file-types
 library(tidyverse)
 library(imager)
 
-#' Load any datase
+#' Load any dataset
 #'
 #' Makes it possible to not only load .csv files (as in the case of the Olivetti
 #' Dataset) but also to load seperate .png, .jpeg or .bmp files as an imageset.
@@ -47,4 +46,36 @@ load_any_imageset <- function(folderpath, filetype) {
 td <- load_any_imageset("testfiles", "jpg")
 
 
+#' Save image
+#'
+#' Save any suitable array as image.
+#'
+#' @param im arr, array-like structure
+#' @param filename str, working names
+#' @param filetype str, "jpg" or "png"
+#' @param path str, optional. Default is current wd.
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' td <- load_any_imageset("testfiles", "jpg")
+#' save_image_ef(td[[3]], "test_save", "jpg", path = "testfiles")
+save_image_ef <- function(im, filename, filetype, path = default) {
+
+  # NEED TO BE TESTED ON FOR EXAMPLE EIGENFACES
+
+  # Turn array into cimg for library imager
+  dim(im) <- c(dim(im), 1, 1)
+  im <- as.cimg(im)
+
+  if (deparse(substitute(path)) == "default") {
+    save.image(im, paste(filename, ".", filetype, sep = ""))
+  }
+  else {
+    save.image(im, paste(path, "/", filename, ".", filetype, sep = ""))
+  }
+}
+
+save_image_ef(td[[3]], "test_save", "jpg", "testfiles")
 

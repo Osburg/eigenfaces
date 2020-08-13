@@ -20,7 +20,7 @@ The data is normalized before performing the PCA.
 }
 \examples{
 # Import Olivetti-faces
-td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
 get_eigenfaces(td, 9)
 }
 \references{

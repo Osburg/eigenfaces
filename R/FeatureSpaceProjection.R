@@ -1,5 +1,5 @@
-library(tidyverse)
-library(pracma)
+#library(tidyverse)
+#library(pracma)
 source("R/helperFunctions_ef.R")
 source("R/imageset_ef.R")
 source("R/image_ef.R")
@@ -101,7 +101,7 @@ FSP.image_ef <- function(img, eigenfaces, avgFace, showCoefficients = FALSE) {
 #'
 #' @examples
 #' # Import Olivetti-faces
-#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+#' td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
 #' eigenfaces <- get_eigenfaces(td, nfaces = 50)
 #' avgFace <- avg_face(td)
 #'

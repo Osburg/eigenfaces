@@ -1,4 +1,4 @@
-library(tidyverse)
+#library(tidyverse)
 source("R/helperFunctions_ef.R")
 source("R/imageset_ef.R")
 source("R/image_ef.R")
@@ -12,7 +12,7 @@ source("R/FeatureSpaceProjection.R")
 #' @return numeric vector of length 1, the euclidean distance of \code{coeffs1} and \code{coeffs2}
 #' @examples
 #' # Import Olivetti-faces
-#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+#' td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
 #' #compute coefficients
 #' eigenfaces <- get_eigenfaces(td, nfaces = 50)
 #' avgFace <- avg_face(td)
@@ -49,7 +49,7 @@ distance_ef <- function(coeffs1, coeffs2) {
 #'
 #' @examples
 #' # Import Olivetti-faces
-#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+#' td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
 #' img <- td[[1]]
 #' closest <- classification_ef(img, td)
 #'

@@ -17,7 +17,7 @@ Tests if an object is of class 'imageset_ef'
 }
 \examples{
 # Import Olivetti-faces
-td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
 # Test
 is.imageset_ef(td)
 

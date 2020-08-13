@@ -1,4 +1,4 @@
-library(tidyverse)
+#library(tidyverse)
 source("R/helperFunctions_ef.R")
 source("R/imageset_ef.R")
 source("R/image_ef.R")
@@ -6,8 +6,8 @@ source("R/FeatureSpaceProjection.R")
 
 # Import Olivetti
 td <- load_imageset_ef("olivetti_X.csv", c(64,64))
-classes <- load_classes_ef("olivetti_y.csv")
 
+classes <- load_classes_ef("olivetti_y.csv")
 
 ###############
 # Plot example images
@@ -38,7 +38,7 @@ plot_examples <- function(td, n, mode) {
 
 # How to use function
 # This is the image used in README.md
-plot_examples(td, 9, mode=ex)
+#plot_examples(td, 30, mode=ef)
 
 
 ###############
@@ -46,7 +46,8 @@ plot_examples(td, 9, mode=ex)
 
 # Get eigenfaces and then reuse plot_examples function in mode=ef
 ef <- get_eigenfaces(td, 9)
-plot_examples(ef, 9, mode=ef)
+#ef
+#plot_examples(ef,9, mode=ef)
 
 
 ################
@@ -54,13 +55,12 @@ plot_examples(ef, 9, mode=ef)
 
 # TODO: turn this into nice looking format
 # TODO: introduce argument. use n eigenfaces for reconstruction
-FSP(td[[11]], ef, avg_face(normalize(td)))
-td[[11]]
+#FSP(td[[5]], ef, avg_face(normalize(td)))
+#td[[5]]
 
-
-################
+        ################
 # Projection on two first eigenvectors
-library(ggplot2)
+#library(ggplot2) #is in library(tidyverse)
 
 ef1 <- as.vector(ef[[1]])
 ef2 <- as.vector(ef[[2]])
@@ -73,9 +73,10 @@ for (i in 1:length(td)) {
   data[i,] <- c(as.vector(td[[i]])%*%ef1,as.vector(td[[i]])%*%ef2,classes[[1]][i])
 }
 
-data
+#data
 
 # Scatterplot
-ggplot(data, aes(x=ef1_x, y=ef2_y, color=class)) + geom_point(shape=19, size=1.2) +
-  #geom_text(aes(label=class), size=2, hjust = -1, vjust = 0.3)
-  scale_color_gradientn(colours = rainbow(100))
+#ggplot(data, aes(x=ef1_x, y=ef2_y, color=class)) + geom_point(shape=19, size=1.2) +
+#geom_text(aes(label=class), size=2, hjust = -1, vjust = 0.3)
+#  scale_color_gradientn(colours = rainbow(100))
+

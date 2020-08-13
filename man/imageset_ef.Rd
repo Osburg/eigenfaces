@@ -17,7 +17,7 @@ Creates an Object of class 'imageset_ef'
 }
 \examples{
 # Import Olivetti-faces
-td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
 # Normalize
 normalize(td)
 }

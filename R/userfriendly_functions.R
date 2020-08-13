@@ -1,4 +1,4 @@
-library(tidyverse)
+#library(tidyverse)
 source("R/helperFunctions_ef.R")
 source("R/imageset_ef.R")
 source("R/image_ef.R")
@@ -63,5 +63,5 @@ plot_olivetti <- function(Persons=1:10, number=10){
 
 }
 
-plot_olivetti(3,10)
+#plot_olivetti(3,10)
 

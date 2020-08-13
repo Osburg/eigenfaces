@@ -2,11 +2,21 @@ Package: eigenfaces
 Type: Package
 Title: PCA on Eigenfaces
 Version: 0.1.0
-Author: Marcel Fischer, Aaron Osburg, Ida Jandl
-Maintainer: The package maintainer <yourself@somewhere.net>
+Authors@R: 
+  c(person("Marcel","Fischer",email="Marcel.Fischer@stud.uni-heidelberg.de",role="aut"),
+  person("Aaron","Osburg",email="Osburg@stud.uni-heidelberg.de",role=c("aut","cre")),
+  person("Ida","Jandl",email="Jandl@stud.uni-heidelberg.de",role="aut"))
+Author: Marcel Fischer [aut],
+  Aaron Osburg [aut,cre],
+  Ida Jandl [aut]
+Maintainer: Aaron Osburg <Osburg@stud.uni-heidelberg.de>
 Description: Performs PCA and multiple sidetasks on the Olivetti-Dataset or 
     similar datasets.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.0
+Depends: 
+    tidyverse,
+    pracma,
+    shiny

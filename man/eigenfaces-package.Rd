@@ -16,4 +16,14 @@ NA
 \references{
 \url{https://www.bytefish.de/pdf/eigenfaces.pdf}
 }
+\author{
+\strong{Maintainer}: Aaron Osburg \email{Osburg@stud.uni-heidelberg.de}
+
+Authors:
+\itemize{
+  \item Marcel Fischer \email{Marcel.Fischer@stud.uni-heidelberg.de}
+  \item Ida Jandl \email{Jandl@stud.uni-heidelberg.de}
+}
+
+}
 \keyword{internal}

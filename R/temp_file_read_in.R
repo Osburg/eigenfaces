@@ -43,7 +43,7 @@ load_any_imageset <- function(folderpath, filetype) {
   td
 }
 
-td <- load_any_imageset("testfiles", "jpg")
+#td <- load_any_imageset("testfiles", "jpg")
 
 
 #' Save image
@@ -77,5 +77,5 @@ save_image_ef <- function(im, filename, filetype, path = default) {
   }
 }
 
-save_image_ef(td[[3]], "test_save", "jpg", "testfiles")
+#save_image_ef(td[[3]], "test_save", "jpg", "testfiles")
 

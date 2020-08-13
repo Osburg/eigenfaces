@@ -1,8 +1,8 @@
-library(tidyverse)
-source("R/helperFunctions_ef.R")
-source("R/imageset_ef.R")
-source("R/image_ef.R")
-source("R/FeatureSpaceProjection.R")
+#library(tidyverse)
+#source("R/helperFunctions_ef.R")
+#source("R/imageset_ef.R")
+#source("R/image_ef.R")
+#source("R/FeatureSpaceProjection.R")
 
 
 
@@ -41,13 +41,13 @@ source("R/FeatureSpaceProjection.R")
 # plot_olivetti1(2,10)
 
 plot_olivetti <- function(Persons=1:10, number=10){
-  td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+  td <- eigenfaces::load_imageset_ef("../olivetti_X.csv", c(64,64))
   if ((typeof(Persons)=="integer"|typeof(Persons)=="double")&length(Persons)!=1){
   par(mfrow=c(length(Persons),number))
   for (i in Persons) {
     for(j in 1:number){
       idx <- (i-1)*10 + j
-      imgShow_ef(td[[idx]])
+      eigenfaces::imgShow_ef(td[[idx]])
     }
   }
   }
@@ -56,7 +56,7 @@ plot_olivetti <- function(Persons=1:10, number=10){
   for (i in Persons) {
     for(j in 1:number){
       idx <- (i-1)*10 + j
-      imgShow_ef(td[[idx]])
+      eigenfaces::imgShow_ef(td[[idx]])
     }
   }
   }

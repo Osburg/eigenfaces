@@ -1,5 +1,5 @@
-library(tidyverse)
-source("R/helperFunctions_ef.R")
+#library(tidyverse)
+#source("R/helperFunctions_ef.R")
 
 
 #' Create an image_ef object from x.
@@ -31,7 +31,7 @@ image_ef <- function(x) {
 #' @export
 print.image_ef <- function(img) {
   #stopifnot("img must be of class 'image_ef'", is.image_ef(img)) #Fehlermeldung bei td <- load_imageset_ef("olivetti_X.csv", c(64,64)), td[[399]]
-  imgShow_ef(img)
+  eigenfaces::imgShow_ef(img)
 }
 
 #' Test if the input is of class 'image_ef'

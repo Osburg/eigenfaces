@@ -2,7 +2,7 @@
 #und einem das Leben erleichtern sollen.
 
 #Importiere benötigte Libraries
-library(tidyverse)
+#library(tidyverse)
 
 #Gibt eine Matrix img als Bild in Graustufen (und nicht auf dem Kopf wie image()) aus
 #TODO: ?-Eintrag

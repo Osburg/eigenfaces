@@ -1,6 +1,6 @@
-library(tidyverse)
-source("R/helperFunctions_ef.R")
-source("R/image_ef.R")
+#library(tidyverse)
+#source("R/helperFunctions_ef.R")
+#source("R/image_ef.R")
 
 #' Load csv-File and Create Imageset_ef
 #'
@@ -33,7 +33,7 @@ load_imageset_ef <- function(path, imgDim) {
   class(td) <- "imageset_ef"
 
   #Füge die image_ef Objekte in das imageset_ef Objekt ein
-  for (i in 1:dim(data)[1]) td[[i]] <- image_ef(data[i,,])
+  for (i in 1:dim(data)[1]) td[[i]] <- eigenfaces::image_ef(data[i,,])
 
   td
 }
@@ -73,7 +73,7 @@ imageset_ef <- function(lst) {
 
   #Wandelt Listenelemente in image_ef Objekte um
   for (i in 1:length(lst)) {
-    lst[[i]] <- image_ef(lst[[i]])
+    lst[[i]] <- eigenfaces::image_ef(lst[[i]])
   }
 
   #Teste, ob alle image_ef Objekte die gleiche Dimension haben
@@ -105,7 +105,7 @@ is.imageset_ef <- function(td) {
     if (length(td) == 0) return(TRUE)
     else {
       for (i in 1:length(td)) {
-        if (is.image_ef(td[[i]])==FALSE) return(FALSE)
+        if (eigenfaces::is.image_ef(td[[i]])==FALSE) return(FALSE)
         else {
           if (!identical(dim(td[[i]]), dim(td[[1]]))) return(FALSE)
         }
@@ -133,7 +133,7 @@ normalize.imageset_ef <- function(td) {
   stopifnot("td must be at least of length 1" = length(td)>0)
 
   for (i in 1:length(td)) {
-    td[[i]] <- normalize(td[[i]])
+    td[[i]] <- eigenfaces::normalize(td[[i]])
   }
   td
 }
@@ -260,7 +260,7 @@ PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
   for (i in 1:ncol(eigenvects)) {
     eigenface <- eigenvects[,i]
     dim(eigenface) <- imgDim
-    eigenfaces[[i]] <- image_ef(eigenface)
+    eigenfaces[[i]] <- eigenfaces::image_ef(eigenface)
   }
 
   eigenfaces <- imageset_ef(eigenfaces)

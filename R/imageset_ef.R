@@ -53,10 +53,11 @@ load_imageset_ef <- function(path, imgDim) {
 #' # Load classes of Olivetti-Dataset
 #' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
 #' classes <- load_classes_ef(olivetti)
-load_classes_ef <- function(path, header=FALSE) {
-  data <- read.csv(path)
+load_classes_ef <- function(path) {
+  data <- read.csv(path, header=FALSE)
   data
 }
+
 
 #' Creates an Object of class 'imageset_ef'
 #'
@@ -224,6 +225,7 @@ subtract_avg_face <- function(td) {
 #' instead of the covariance matrix. However, this causes that only a subset of the eigenvectors of the covariance matrix is returned.
 #' If quick is set TRUE, this option is activated.
 PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
+  force(quick)
   stopifnot("td must be of class 'imageset_ef'" = is.imageset_ef(td))
   stopifnot("td must be at least of length 1" = length(td)>0)
   #stopifnot("showEigenvals must be logical" = is.logical(showEigenvals))
@@ -282,8 +284,9 @@ PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
 #' Makes use of the PCA function to perform the principle component analysis.
 #' The data is normalized before performing the PCA.
 #'
-#' @param td List of arrays. Training data.
-#' @param nfaces The desired number of eigenfaces.
+#' @param td an object of class 'imageset_ef'. List of arrays. Training data.
+#' @param nfaces a numeric vector of length 1. The desired number of eigenfaces.
+#' @param quick a logical vector of length 1. Determines if the PCA is done with 'quick=TRUE' or 'quick=FALSE'.
 #' @return Returns n=1,...,nfaces Eigenfaces.
 #'
 #' @examples

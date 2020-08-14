@@ -61,6 +61,8 @@ FSP.image_ef <- function(img, eigenfaces, avgFace, showCoefficients = FALSE) {
   #stopifnot("eigen must be of class 'imageset_ef'" = is.imageset_ef(td))
   #stopifnot("td must be at least of length 1" = length(td)>0)
   #stopifnot("img und imageset_ef must have the same dimension" = dim(img) == dim(td[[1]]))
+  #Funktioniert nur wenn dataset auch wirklich td heißt. Deshalb bisschen ungeschickt,
+  #weil jeder user das ja wahrscheinlich anders nennt.
   stopifnot("showCoefficients must be logical" = is.logical(showCoefficients))
   stopifnot("showCoefficients must be of length 1" = length(showCoefficients)==1)
 

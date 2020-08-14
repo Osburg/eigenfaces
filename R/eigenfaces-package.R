@@ -11,6 +11,11 @@
 #' @import tidyverse
 #' @import pracma
 #' @import shiny
+#' @importFrom grDevices hcl.colors
+#' @importFrom graphics image
+#' @importFrom graphics mtext
+#' @importFrom graphics par
+#' @importFrom utils read.csv
 NULL
 
 

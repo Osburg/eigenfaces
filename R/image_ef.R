@@ -29,7 +29,7 @@ image_ef <- function(x) {
 #' @examples
 #' img <- image_ef(matrix(c(1,0,1,0), nrow=2))
 #' @export
-print.image_ef <- function(img) {
+print.image_ef <- function(img, ...) {
   stopifnot("img must be of class 'image_ef'" = is.image_ef(img))
   imgShow_ef(img)
 }

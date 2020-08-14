@@ -38,13 +38,20 @@ to_jpeg <- function(obj) UseMethod("to_csv")
 to_png <- function(obj) UseMethod("to_csv")
 
 
-#Generische Funktion zum Normalisieren von image_ef, imageset_ef Objekten
+#'Normalization
+#'
+#' @param obj an object to be normalized (e.g. of class 'image_ef', 'imageset_ef')
+#'
 normalize <- function(obj) UseMethod("normalize")
 
-  #Generische Funktion zur Projektion in den feature space
 #' Feature Space Projection
 #'
 #' Projects an image or set of images into feature space defined by a set of eigenfaces
+#'
+#' @param obj an object to be proected on eigenfaces (e.g. of class 'image_ef', 'imageset_ef')
+#' @param eigenfaces an object of class 'imageset_ef'. Describes the vectors to project on.
+#' @param avgFace an object of class 'image_ef'. Average face of the underlying imageset_ef
+#' @param showCoefficients a logical vector of length 1 (TRUE or FALSE). Determines whether to additionally return the coefficients of the linear combination representing obj.
 #'
 #' For details see FSP.image_ef and FSP.imageset_ef
 FSP <- function(obj, eigenfaces, avgFace, showCoefficients = TRUE) UseMethod("FSP", obj)

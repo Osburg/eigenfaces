@@ -1,5 +1,5 @@
 #library(tidyverse)
-source("R/helperFunctions_ef.R")
+# source("R/helperFunctions_ef.R")
 
 
 #' Create an image_ef object from x.
@@ -26,6 +26,7 @@ image_ef <- function(x) {
 #' An implementation of the \code{print} function for 'image_ef' objects.
 #'
 #' @param img An image_ef object.
+#' @param ... TODO
 #' @examples
 #' img <- image_ef(matrix(c(1,0,1,0), nrow=2))
 #' @export

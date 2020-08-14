@@ -6,9 +6,17 @@
 \usage{
 FSP(obj, eigenfaces, avgFace, showCoefficients = TRUE)
 }
+\arguments{
+\item{obj}{an object to be proected on eigenfaces (e.g. of class 'image_ef', 'imageset_ef')}
+
+\item{eigenfaces}{an object of class 'imageset_ef'. Describes the vectors to project on.}
+
+\item{avgFace}{an object of class 'image_ef'. Average face of the underlying imageset_ef}
+
+\item{showCoefficients}{a logical vector of length 1 (TRUE or FALSE). Determines whether to additionally return the coefficients of the linear combination representing obj.
+
+For details see FSP.image_ef and FSP.imageset_ef}
+}
 \description{
 Projects an image or set of images into feature space defined by a set of eigenfaces
-}
-\details{
-For details see FSP.image_ef and FSP.imageset_ef
 }

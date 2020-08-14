@@ -5,7 +5,7 @@
 #' #' The Image pixel values are scaled to [0, 1] interval. The names of the persons are encoded to an integer of 0 to 39.
 #' #' @docType data
 #' #' @format A .csv file
-#' #' @source \url{https://gist.github.com/mick001/e22582b1d67e02396dcbd199d60d117e}
+#' #' @source \url{https://scikit-learn.org/0.19/modules/generated/sklearn.datasets.fetch_olivetti_faces.html#sklearn.datasets.fetch_olivetti_faces}
 #' #' @keywords internal
 #' #' @export
 #' "olivetti_X.csv"

@@ -275,8 +275,9 @@ PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
 #' Makes use of the PCA function to perform the principle component analysis.
 #' The data is normalized before performing the PCA.
 #'
-#' @param td List of arrays. Training data.
-#' @param nfaces The desired number of eigenfaces.
+#' @param td an object of class 'imageset_ef'. List of arrays. Training data.
+#' @param nfaces a numeric vector of length 1. The desired number of eigenfaces.
+#' @param quick a logical vector of length 1. Determines if the PCA is done with 'quick=TRUE' or 'quick=FALSE'.
 #' @return Returns n=1,...,nfaces Eigenfaces.
 #'
 #' @examples

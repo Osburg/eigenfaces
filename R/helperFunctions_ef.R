@@ -1,10 +1,4 @@
-#Importiere benötigte Libraries
-#library(tidyverse)
-
 #Gibt eine Matrix img als Bild in Graustufen (und nicht auf dem Kopf wie image()) aus
-#TODO: ?-Eintrag
-#TODO: Test
-#TODO: Fehler, warnings
 imgShow_ef <- function(img) {
   img %>%
     apply(1, rev) %>%
@@ -16,9 +10,6 @@ imgShow_ef <- function(img) {
 #Jede Zeile der .csv Datei bezeichnet ein Bild. Die ersten width Pixel bezeichnen die erste Bildzeile, die
 #zweiten die zweite Bildzeile ...
 #n = Anzahl der Zeilen/Bilder, dimension = Dimension der einzelnen Zeilen (z.B. 64x64 für quad. Bilder)
-#TODO: ?-Eintrag
-#TODO: Test
-#TODO: Fehler, Warnings
 csv_to_array_ef <- function(path, dimension = c(64,64)) {
   data  <- read.csv(path)
   nrow <- nrow(data)
@@ -27,23 +18,10 @@ csv_to_array_ef <- function(path, dimension = c(64,64)) {
   data
 }
 
-#TODO: Schreibe eine Funktion, die eine Menge von Bildpfaden in eine .csv-Datei umwandelt
-
-
-#Generische Funktionen zum Speichern von image_ef oder trainingDataset_ef Objekten
-to_csv <- function(obj) UseMethod("to_csv")
-
-to_jpeg <- function(obj) UseMethod("to_csv")
-
-to_png <- function(obj) UseMethod("to_csv")
-
-
-
 #'Normalization
 #'
 #' @param obj an object to be normalized (e.g. of class 'image_ef', 'imageset_ef')
 #' @param ... additional arguments
-#' @export
 normalize <- function(obj, ...) UseMethod("normalize")
 
 #' Feature Space Projection

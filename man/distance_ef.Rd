@@ -17,14 +17,3 @@ numeric vector of length 1, the euclidean distance of \code{coeffs1} and \code{c
 \description{
 Euclidean distance between the coefficient vectors of the projection of two images
 }
-\examples{
-# Import Olivetti-faces
-olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
-td <- load_imageset_ef(olivetti, c(64,64))
-#compute coefficients
-eigenfaces <- get_eigenfaces(td, nfaces = 50)
-avgFace <- avg_face(td)
-coeffs1 <- FSP(td[[1]], eigenfaces, avgFace, showCoefficients=TRUE)[[2]]
-coeffs2 <- FSP(td[[2]], eigenfaces, avgFace, showCoefficients=TRUE)[[2]]
-distance_ef(coeffs1, coeffs2)
-}

@@ -1,18 +1,8 @@
-#library(tidyverse)
-#library(pracma)
-# source("R/helperFunctions_ef.R")
-# source("R/imageset_ef.R")
-# source("R/image_ef.R")
-
-
 #' Projection of a vector onto a unit vector
 #'
 #' @param x numeric vector or matrix
 #' @param y numeric vector or matrix
 #' @return scalar product of x with unit vector in y-direction
-#' @export
-#' @examples
-#' proj(c(1,1,1), c(1,0,0))
 proj <- function(x,y) {
   stopifnot("x and y must be of the same length" = length(x)==length(y))
   stopifnot("x must be numeric" = is.numeric(x))
@@ -59,9 +49,9 @@ proj <- function(x,y) {
 FSP.image_ef <- function(obj, eigenfaces, avgFace, showCoefficients = FALSE, ...) {
   stopifnot("avgFace must be of class 'iage_ef'" = is.image_ef(avgFace))
   stopifnot("obj must be of class 'image_ef'" = is.image_ef(obj))
-  #stopifnot("eigenfaces must be of class 'imageset_ef'" = is.imageset_ef(eigenfaces))
-  #stopifnot("obj must be at least of length 1" = length(obj)>0)
-  #stopifnot("obj und imageset_ef must have the same dimension" = dim(obj) == dim(obj[[1]]))
+  stopifnot("eigenfaces must be of class 'imageset_ef'" = is.imageset_ef(eigenfaces))
+  stopifnot("obj must be at least of length 1" = length(obj)>0)
+  stopifnot("obj und imageset_ef must have the same dimension" = dim(obj) == dim(obj[[1]]))
   stopifnot("showCoefficients must be logical" = is.logical(showCoefficients))
   stopifnot("showCoefficients must be of length 1" = length(showCoefficients)==1)
 

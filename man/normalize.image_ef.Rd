@@ -17,9 +17,6 @@ An object of class 'image_ef'. The pixel values are those of img minus the mean 
 \description{
 Subtracts the mean over all pixel from every single pixel and returns the result.
 }
-\examples{
-normalize(image_ef(c(1,0,1,0)))
-}
 \references{
 https://www.bytefish.de/pdf/eigenfaces.pdf
 }

@@ -16,9 +16,8 @@ object of class 'imageset_ef',a list consisting of objects of class 'image_ef'.
 Creates an Object of class 'imageset_ef'
 }
 \examples{
-# Import Olivetti-faces
-olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
-td <- load_imageset_ef(olivetti, c(64,64))
-# Normalize
-normalize(td)
+img1 <- image_ef(matrix(c(1,0,0,1), nrow=2))
+img2 <- image_ef(matrix(c(0,1,1,0), nrow=2))
+lst <- list(img1, img2)
+td <- imageset_ef(lst)
 }

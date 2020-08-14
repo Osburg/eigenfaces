@@ -1,7 +1,3 @@
-#library(tidyverse)
-# source("R/helperFunctions_ef.R")
-# source("R/image_ef.R")
-
 #' Load csv-File and Create Imageset_ef
 #'
 #' Loads csv-file and saves it as imageset_ef. Imageset_ef will be a list of
@@ -63,11 +59,10 @@ load_classes_ef <- function(path) {
 #' @param lst list of objects capable of being used as input for \code{image_ef()} function.
 #' @return object of class 'imageset_ef',a list consisting of objects of class 'image_ef'.
 #' @examples
-#' # Import Olivetti-faces
-#' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
-#' td <- load_imageset_ef(olivetti, c(64,64))
-#' # Normalize
-#' normalize(td)
+#' img1 <- image_ef(matrix(c(1,0,0,1), nrow=2))
+#' img2 <- image_ef(matrix(c(0,1,1,0), nrow=2))
+#' lst <- list(img1, img2)
+#' td <- imageset_ef(lst)
 #' @export
 imageset_ef <- function(lst) {
   stopifnot("lst must be a list" = is.list(lst))
@@ -127,13 +122,12 @@ is.imageset_ef <- function(td) {
 #' @param ... additional arguments
 #'
 #' @return Returns normalized version of td.
-#' @export
-#' @examples
-#' # Import Olivetti-faces
-#' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
-#' td <- load_imageset_ef(olivetti, c(64,64))
-#' # Normalize
-#' normalize(td)
+# #' @examples
+# #' # Import Olivetti-faces
+# #' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
+# #' td <- load_imageset_ef(olivetti, c(64,64))
+# #' # Normalize
+# #' normalize(td)
 normalize.imageset_ef <- function(obj, ...) {
   stopifnot("obj must be of class 'imageset_ef'" = is.imageset_ef(obj))
   stopifnot("obj must be at least of length 1" = length(obj)>0)
@@ -181,13 +175,6 @@ avg_face <- function(td) {
 #' @param td List of arrays. Training data.
 #'
 #' @return Returns td - average face.
-#' @export
-#' @examples
-#' # Import Olivetti-faces
-#' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
-#' td <- load_imageset_ef(olivetti, c(64,64))
-#' # Subtract
-#' subtract_avg_face(td)
 subtract_avg_face <- function(td) {
   stopifnot("td must be of class 'imageset_ef'" = is.imageset_ef(td))
   stopifnot("td must be at least of length 1" = length(td)>0)
@@ -229,7 +216,7 @@ PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
   force(quick)
   stopifnot("td must be of class 'imageset_ef'" = is.imageset_ef(td))
   stopifnot("td must be at least of length 1" = length(td)>0)
-  #stopifnot("showEigenvals must be logical" = is.logical(showEigenvals))
+  stopifnot("showEigenvals must be logical" = is.logical(showEigenvals))
   stopifnot("showEigenvals must be of length 1" = length(showEigenvals)==1)
   stopifnot("quick must be logical" = is.logical(quick))
   stopifnot("quick must be of length 1" = length(quick)==1)

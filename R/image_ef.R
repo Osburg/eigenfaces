@@ -1,7 +1,3 @@
-#library(tidyverse)
-# source("R/helperFunctions_ef.R")
-
-
 #' Create an image_ef object from x.
 #'
 #' @param x A matrix or an atomic vector of type numeric.
@@ -55,9 +51,6 @@ is.image_ef <- function(img) {is.numeric(img) && is.element("image_ef", class(im
 #' @param obj An object of class 'image_ef'.
 #' @param ... addiotional arguments
 #' @return An object of class 'image_ef'. The pixel values are those of img minus the mean over all pixels of img.
-#' @export
-#' @examples
-#' normalize(image_ef(c(1,0,1,0)))
 #' @references https://www.bytefish.de/pdf/eigenfaces.pdf
 normalize.image_ef <- function(obj, ...) {
   stopifnot("Eingabe muss ein image_ef sein" = is.image_ef(obj))

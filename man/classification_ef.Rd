@@ -27,7 +27,8 @@ For further explanation see \code{?PCA}.
 }
 \examples{
 # Import Olivetti-faces
-td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
+olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
+td <- load_imageset_ef(olivetti, c(64,64))
 img <- td[[1]]
 closest <- classification_ef(img, td)
 

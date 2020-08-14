@@ -4,6 +4,7 @@ source("R/helperFunctions_ef.R")
 source("R/imageset_ef.R")
 source("R/image_ef.R")
 
+
 #' Projection of a vector onto a unit vector
 #'
 #' @param x numeric vector or matrix
@@ -46,20 +47,19 @@ proj <- function(x,y) {
 #'
 #' @examples
 #' # Import Olivetti-faces
-#' td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+#' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
+#' td <- load_imageset_ef(olivetti, c(64,64))
 #' img <- td[[42]]
 #' eigenfaces <- get_eigenfaces(td, nfaces = 50)
 #' avgFace <- avg_face(td)
-#'
 #' projection <- FSP(img, eigenfaces, avgFace, showCoefficients=FALSE)[[1]]
-#'
 #' @export
 FSP.image_ef <- function(img, eigenfaces, avgFace, showCoefficients = FALSE) {
   stopifnot("avgFace must be of class 'iage_ef'" = is.image_ef(avgFace))
   stopifnot("img must be of class 'image_ef'" = is.image_ef(img))
-  stopifnot("eigen must be of class 'imageset_ef'" = is.imageset_ef(td))
-  stopifnot("td must be at least of length 1" = length(td)>0)
-  stopifnot("img und imageset_ef must have the same dimension" = dim(img) == dim(td[[1]]))
+  #stopifnot("eigen must be of class 'imageset_ef'" = is.imageset_ef(td))
+  #stopifnot("td must be at least of length 1" = length(td)>0)
+  #stopifnot("img und imageset_ef must have the same dimension" = dim(img) == dim(td[[1]]))
   stopifnot("showCoefficients must be logical" = is.logical(showCoefficients))
   stopifnot("showCoefficients must be of length 1" = length(showCoefficients)==1)
 
@@ -101,12 +101,11 @@ FSP.image_ef <- function(img, eigenfaces, avgFace, showCoefficients = FALSE) {
 #'
 #' @examples
 #' # Import Olivetti-faces
-#' td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
+#' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
+#' td <- load_imageset_ef(olivetti, c(64,64))
 #' eigenfaces <- get_eigenfaces(td, nfaces = 50)
 #' avgFace <- avg_face(td)
-#'
 #' projection <- FSP(td, eigenfaces, avgFace, showCoefficients=FALSE)[[1]]
-#'
 #' @export
 FSP.imageset_ef <- function(td, eigenfaces, avgFace, showCoefficients = FALSE) {
   stopifnot("eigenfaces must be of class 'imageset_ef'" = is.imageset_ef(eigenfaces))

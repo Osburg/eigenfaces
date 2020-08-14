@@ -28,11 +28,10 @@ face is substracted before the projection and added onto the projection afterwar
 }
 \examples{
 # Import Olivetti-faces
-td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
+td <- load_imageset_ef(olivetti, c(64,64))
 img <- td[[42]]
 eigenfaces <- get_eigenfaces(td, nfaces = 50)
 avgFace <- avg_face(td)
-
 projection <- FSP(img, eigenfaces, avgFace, showCoefficients=FALSE)[[1]]
-
 }

@@ -39,6 +39,7 @@ to_png <- function(obj) UseMethod("to_csv")
 
 
 #Generische Funktion zum Normalisieren von image_ef, imageset_ef Objekten
+#' @export
 normalize <- function(obj) UseMethod("normalize")
 
   #Generische Funktion zur Projektion in den feature space
@@ -47,4 +48,5 @@ normalize <- function(obj) UseMethod("normalize")
 #' Projects an image or set of images into feature space defined by a set of eigenfaces
 #'
 #' For details see FSP.image_ef and FSP.imageset_ef
-FSP <- function(obj, eigenfaces, avgFace, showCoefficients = TRUE) UseMethod("FSP", obj)
+#' @export
+FSP <- function(obj, eigenfaces, avgFace, showCoefficients = TRUE) UseMethod("FSP")

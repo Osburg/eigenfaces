@@ -10,9 +10,11 @@ source("R/FeatureSpaceProjection.R")
 #' @param coeffs2 numeric vector, second coefficient vector
 #'
 #' @return numeric vector of length 1, the euclidean distance of \code{coeffs1} and \code{coeffs2}
+#' @export
 #' @examples
 #' # Import Olivetti-faces
-#' td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
+#' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
+#' td <- load_imageset_ef(olivetti, c(64,64))
 #' #compute coefficients
 #' eigenfaces <- get_eigenfaces(td, nfaces = 50)
 #' avgFace <- avg_face(td)
@@ -49,7 +51,8 @@ distance_ef <- function(coeffs1, coeffs2) {
 #'
 #' @examples
 #' # Import Olivetti-faces
-#' td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
+#' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
+#' td <- load_imageset_ef(olivetti, c(64,64))
 #' img <- td[[1]]
 #' closest <- classification_ef(img, td)
 #'

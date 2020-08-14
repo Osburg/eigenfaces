@@ -18,5 +18,5 @@ the dataset.
 }
 \examples{
 # Load classes of Olivetti-Dataset
-classes <- load_classes_ef("../olivetti_y.csv")
+classes <- load_classes_ef(olivetti)
 }

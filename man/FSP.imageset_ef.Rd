@@ -27,10 +27,9 @@ The projected faces and the coefficients are returned as a list each (combined t
 }
 \examples{
 # Import Olivetti-faces
-td <- load_imageset_ef("../olivetti_X.csv", c(64,64))
+olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
+td <- load_imageset_ef(olivetti, c(64,64))
 eigenfaces <- get_eigenfaces(td, nfaces = 50)
 avgFace <- avg_face(td)
-
 projection <- FSP(td, eigenfaces, avgFace, showCoefficients=FALSE)[[1]]
-
 }

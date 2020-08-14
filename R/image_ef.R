@@ -53,6 +53,7 @@ is.image_ef <- function(img) {is.numeric(img) && is.element("image_ef", class(im
 #'
 #' @param img An object of class 'image_ef'.
 #' @return An object of class 'image_ef'. The pixel values are those of img minus the mean over all pixels of img.
+#' @export
 #' @examples
 #' normalize(image_ef(c(1,0,1,0)))
 #' @references https://www.bytefish.de/pdf/eigenfaces.pdf

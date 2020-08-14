@@ -10,6 +10,7 @@ source("R/image_ef.R")
 #' @param x numeric vector or matrix
 #' @param y numeric vector or matrix
 #' @return scalar product of x with unit vector in y-direction
+#' @export
 #' @examples
 #' proj(c(1,1,1), c(1,0,0))
 proj <- function(x,y) {

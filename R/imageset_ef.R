@@ -51,6 +51,7 @@ load_imageset_ef <- function(path, imgDim) {
 #'
 #' @examples
 #' # Load classes of Olivetti-Dataset
+#' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
 #' classes <- load_classes_ef(olivetti)
 load_classes_ef <- function(path, header=FALSE) {
   data <- read.csv(path)
@@ -125,7 +126,7 @@ is.imageset_ef <- function(td) {
 #' @param td List of arrays. Training data.
 #'
 #' @return Returns normalized version of td.
-#'
+#' @export
 #' @examples
 #' # Import Olivetti-faces
 #' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")

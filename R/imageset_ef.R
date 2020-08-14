@@ -123,7 +123,8 @@ is.imageset_ef <- function(td) {
 #'
 #' Normalizes all entries in the imageset_ef list.
 #'
-#' @param td List of arrays. Training data.
+#' @param obj List of arrays. Training data.
+#' @param ... additional arguments
 #'
 #' @return Returns normalized version of td.
 #' @export
@@ -133,14 +134,14 @@ is.imageset_ef <- function(td) {
 #' td <- load_imageset_ef(olivetti, c(64,64))
 #' # Normalize
 #' normalize(td)
-normalize.imageset_ef <- function(td) {
-  stopifnot("td must be of class 'imageset_ef'" = is.imageset_ef(td))
-  stopifnot("td must be at least of length 1" = length(td)>0)
+normalize.imageset_ef <- function(obj, ...) {
+  stopifnot("obj must be of class 'imageset_ef'" = is.imageset_ef(obj))
+  stopifnot("obj must be at least of length 1" = length(obj)>0)
 
-  for (i in 1:length(td)) {
-    td[[i]] <- normalize(td[[i]])
+  for (i in 1:length(obj)) {
+    obj[[i]] <- normalize(obj[[i]])
   }
-  td
+  obj
 }
 
 #' Calculate Average Face
@@ -223,7 +224,7 @@ subtract_avg_face <- function(td) {
 #' # Import Olivetti-faces
 #' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
 #' td <- load_imageset_ef(olivetti, c(64,64))
-#' PCA(td, showEigenvals = FALSE, quick=FALSE)
+#' PCA(td, showEigenvals = FALSE, quick=TRUE)
 PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
   force(quick)
   stopifnot("td must be of class 'imageset_ef'" = is.imageset_ef(td))
@@ -294,7 +295,7 @@ PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
 #' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
 #' td <- load_imageset_ef(olivetti, c(64,64))
 #' get_eigenfaces(td, 9)
-#' PCA(td,showEigenvals=FALSE, quick=FALSE)
+#' PCA(td,showEigenvals=FALSE, quick=TRUE)
 #' @references Marinovsky F., Wagner P., Gesichtserkennung mit Eigenfaces, FH Zittau/Görlitz
 #' @export
 get_eigenfaces <- function(td, nfaces = 15, quick = FALSE) {

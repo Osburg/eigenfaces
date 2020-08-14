@@ -4,10 +4,12 @@
 \alias{normalize.imageset_ef}
 \title{Normalization of an imageset_ef}
 \usage{
-\method{normalize}{imageset_ef}(td)
+\method{normalize}{imageset_ef}(obj, ...)
 }
 \arguments{
-\item{td}{List of arrays. Training data.}
+\item{obj}{List of arrays. Training data.}
+
+\item{...}{additional arguments}
 }
 \value{
 Returns normalized version of td.

@@ -25,14 +25,14 @@ image_ef <- function(x) {
 #'
 #' An implementation of the \code{print} function for 'image_ef' objects.
 #'
-#' @param img An image_ef object.
-#' @param ... TODO
+#' @param x An image_ef object.
+#' @param ... additional arguments
 #' @examples
 #' img <- image_ef(matrix(c(1,0,1,0), nrow=2))
 #' @export
-print.image_ef <- function(img, ...) {
-  stopifnot("img must be of class 'image_ef'" = is.image_ef(img))
-  imgShow_ef(img)
+print.image_ef <- function(x, ...) {
+  stopifnot("img must be of class 'image_ef'" = is.image_ef(x))
+  imgShow_ef(x)
 }
 
 #' Test if the input is of class 'image_ef'
@@ -52,15 +52,16 @@ is.image_ef <- function(img) {is.numeric(img) && is.element("image_ef", class(im
 #'
 #' Subtracts the mean over all pixel from every single pixel and returns the result.
 #'
-#' @param img An object of class 'image_ef'.
+#' @param obj An object of class 'image_ef'.
+#' @param ... addiotional arguments
 #' @return An object of class 'image_ef'. The pixel values are those of img minus the mean over all pixels of img.
 #' @export
 #' @examples
 #' normalize(image_ef(c(1,0,1,0)))
 #' @references https://www.bytefish.de/pdf/eigenfaces.pdf
-normalize.image_ef <- function(img) {
-  stopifnot("Eingabe muss ein image_ef sein" = is.image_ef(img))
+normalize.image_ef <- function(obj, ...) {
+  stopifnot("Eingabe muss ein image_ef sein" = is.image_ef(obj))
 
-  img <- img - sum(img)/length(img)
-  img
+  obj <- obj - sum(obj)/length(obj)
+  obj
 }

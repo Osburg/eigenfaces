@@ -27,7 +27,7 @@ Returns eigenvectors (and eigenvalues) of the covariance matrix as an 'imageset_
 # Import Olivetti-faces
 olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
 td <- load_imageset_ef(olivetti, c(64,64))
-PCA(td, showEigenvals = FALSE, quick=FALSE)
+PCA(td, showEigenvals = FALSE, quick=TRUE)
 }
 \references{
 Marinovsky F., Wagner P., Gesichtserkennung mit Eigenfaces, FH Zittau/Görlitz

@@ -54,7 +54,7 @@ distance_ef <- function(coeffs1, coeffs2) {
 #' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
 #' td <- load_imageset_ef(olivetti, c(64,64))
 #' img <- td[[1]]
-#' closest <- classification_ef(img, td)
+#' closest <- classification_ef(img, td, quick = TRUE)
 #'
 #' @export
 classification_ef <- function(img, td, nclosest = 3, neigenfaces = 15, quick = FALSE) {

@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{img}{An image_ef object.}
+
+\item{...}{TODO}
 }
 \description{
 An implementation of the \code{print} function for 'image_ef' objects.

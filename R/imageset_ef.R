@@ -216,6 +216,7 @@ subtract_avg_face <- function(td) {
 #' instead of the covariance matrix. However, this causes that only a subset of the eigenvectors of the covariance matrix is returned.
 #' If quick is set TRUE, this option is activated.
 PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
+  force(quick)
   stopifnot("td must be of class 'imageset_ef'" = is.imageset_ef(td))
   stopifnot("td must be at least of length 1" = length(td)>0)
   stopifnot("showEigenvals must be logical" = is.logical(showEigenvals))

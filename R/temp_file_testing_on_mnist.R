@@ -1,6 +1,6 @@
 # Testing mnist data
 
-source("R/visualize_ef.R")
+#source("R/visualize_ef.R")
 
 
 load_imageset_mnist <- function(path, imgDim) {
@@ -41,13 +41,13 @@ load_classes_mnist <- function(path, header=FALSE) {
 td2 <- load_imageset_mnist("mnist_test.csv", c(28,28))
 classes_mnist <- load_classes_mnist("mnist_test.csv")
 
-plot_examples(td2, 9, mode=ex)
+#plot_examples(td2, 9, mode=ex)
 
 ef2 <- get_eigenfaces(td2, 400)
-plot_examples(ef2, 9, mode=ef)
+#plot_examples(ef2, 9, mode=ef)
 
-FSP(td2[[1]], ef2, avg_face(normalize(td2)))
-td2[[1]]
+#FSP(td2[[1]], ef2, avg_face(normalize(td2)))
+#td2[[1]]
 
 # Projection on two first eigenvectors
 library(ggplot2)
@@ -63,9 +63,9 @@ for (i in 1:length(td)) {
   data[i,] <- c(as.vector(td2[[i]])%*%ef1x,as.vector(td2[[i]])%*%ef2y,classes_mnist[i])
 }
 
-data
+#data
 
 # Scatterplot
-ggplot(data, aes(x=ef1_x, y=ef2_y, color=class)) + geom_point(shape=19, size=1.2) +
+#ggplot(data, aes(x=ef1_x, y=ef2_y, color=class)) + geom_point(shape=19, size=1.2) +
   #geom_text(aes(label=class), size=2, hjust = -1, vjust = 0.3)
-  scale_color_gradientn(colours = rainbow(100))
+#  scale_color_gradientn(colours = rainbow(100))

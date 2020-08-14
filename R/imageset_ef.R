@@ -1,6 +1,6 @@
 #library(tidyverse)
-source("R/helperFunctions_ef.R")
-source("R/image_ef.R")
+# source("R/helperFunctions_ef.R")
+# source("R/image_ef.R")
 
 #' Load csv-File and Create Imageset_ef
 #'
@@ -181,7 +181,7 @@ avg_face <- function(td) {
 #' @param td List of arrays. Training data.
 #'
 #' @return Returns td - average face.
-#'
+#' @export
 #' @examples
 #' # Import Olivetti-faces
 #' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
@@ -206,6 +206,12 @@ subtract_avg_face <- function(td) {
 #' Calculates the data covariance matrix of the original data.
 #' Returns eigenvectors (and eigenvalues) of the covariance matrix as an 'imageset_ef' object.
 #'
+#'\code{td} is the 'imageset_ef'-object where the images are saved as 'image_ef' objects. \code{showEigenvals} determins
+#' whether the eigenvalues are returned in addition to the eigenvectors (FALSE means only the eigenvectors are returned).
+#' When the number of pixels of each images is much bigger than the number of images in \code{td} it is faster to diagonalize \code{t(A) %*% A}
+#' instead of the covariance matrix. However, this causes that only a subset of the eigenvectors of the covariance matrix is returned.
+#' If quick is set TRUE, this option is activated.
+#'
 #' @param td an object of class 'imageset_ef', training data.
 #' @param showEigenvals logical vector (TRUE or FALSE).
 #' @param quick logical vector (TRUE or FALSE).
@@ -219,11 +225,7 @@ subtract_avg_face <- function(td) {
 #' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
 #' td <- load_imageset_ef(olivetti, c(64,64))
 #' PCA(td, showEigenvals = FALSE, quick=FALSE)
-#' @details \code{td} is the 'imageset_ef'-object where the images are saved as 'image_ef' objects. \code{showEigenvals} determins
-#' whether the eigenvalues are returned in addition to the eigenvectors (FALSE means only the eigenvectors are returned).
-#' When the number of pixels of each images is much bigger than the number of images in \code{td} it is faster to diagonalize \code{t(A) %*% A}
-#' instead of the covariance matrix. However, this causes that only a subset of the eigenvectors of the covariance matrix is returned.
-#' If quick is set TRUE, this option is activated.
+
 PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
   force(quick)
   stopifnot("td must be of class 'imageset_ef'" = is.imageset_ef(td))

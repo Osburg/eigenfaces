@@ -1,11 +1,11 @@
-# Shiny
-
-library(shiny)
-source("R/helperFunctions_ef.R")
-source("R/imageset_ef.R")
-source("R/image_ef.R")
-source("R/FeatureSpaceProjection.R")
-
+# # Shiny
+#
+# library(shiny)
+# source("R/helperFunctions_ef.R")
+# source("R/imageset_ef.R")
+# source("R/image_ef.R")
+# source("R/FeatureSpaceProjection.R")
+#
 # Define UI for app that draws outputs and sliders ----
 ui <- fluidPage(
 
@@ -93,11 +93,11 @@ server <- function(input, output) {
 ##########
 
 # BEFORE USING SHINY APP THIS NEEDS TO BE RUN
-td <- load_imageset_ef("olivetti_X.csv", c(64,64))
+td <- load_imageset_ef("inst/extdata/olivetti_X.csv", c(64,64))
 ef <- get_eigenfaces(td, 400, quick = FALSE)
 
 td <- load_imageset_mnist("mnist_test.csv", c(28,28))
 ef <- get_eigenfaces(td, 400, quick = FALSE)
 
 # Acutally opening the shiny app
-shinyApp(ui = ui, server = server)
+#shinyApp(ui = ui, server = server)

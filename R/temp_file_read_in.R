@@ -1,6 +1,6 @@
 # Temporary file
 
-library(tidyverse)
+#library(tidyverse)
 library(imager)
 
 #' Load any dataset

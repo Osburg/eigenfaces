@@ -1,8 +1,8 @@
 #library(tidyverse)
-source("R/helperFunctions_ef.R")
-source("R/imageset_ef.R")
-source("R/image_ef.R")
-source("R/FeatureSpaceProjection.R")
+# source("R/helperFunctions_ef.R")
+# source("R/imageset_ef.R")
+# source("R/image_ef.R")
+# source("R/FeatureSpaceProjection.R")
 
 #' Euclidean distance between the coefficient vectors of the projection of two images
 #'

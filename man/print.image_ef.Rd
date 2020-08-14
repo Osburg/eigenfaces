@@ -4,7 +4,7 @@
 \alias{print.image_ef}
 \title{Show an image_ef object as image in the plots section}
 \usage{
-\method{print}{image_ef}(img)
+\method{print}{image_ef}(img, ...)
 }
 \arguments{
 \item{img}{An image_ef object.}

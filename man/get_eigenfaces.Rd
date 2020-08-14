@@ -7,9 +7,11 @@
 get_eigenfaces(td, nfaces = 15, quick = FALSE)
 }
 \arguments{
-\item{td}{List of arrays. Training data.}
+\item{td}{an object of class 'imageset_ef'. List of arrays. Training data.}
 
-\item{nfaces}{The desired number of eigenfaces.}
+\item{nfaces}{a numeric vector of length 1. The desired number of eigenfaces.}
+
+\item{quick}{a logical vector of length 1. Determines if the PCA is done with 'quick=TRUE' or 'quick=FALSE'.}
 }
 \value{
 Returns n=1,...,nfaces Eigenfaces.

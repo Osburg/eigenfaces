@@ -19,4 +19,8 @@ RoxygenNote: 7.1.1
 Depends: 
     tidyverse,
     pracma,
-    shiny
+    shiny,
+    magrittr,
+    dplyr,
+    tibble,
+    testthat

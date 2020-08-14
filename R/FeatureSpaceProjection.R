@@ -1,8 +1,8 @@
 #library(tidyverse)
 #library(pracma)
-source("R/helperFunctions_ef.R")
-source("R/imageset_ef.R")
-source("R/image_ef.R")
+# source("R/helperFunctions_ef.R")
+# source("R/imageset_ef.R")
+# source("R/image_ef.R")
 
 
 #' Projection of a vector onto a unit vector

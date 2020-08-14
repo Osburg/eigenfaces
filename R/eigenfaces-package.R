@@ -16,6 +16,9 @@
 #' @importFrom graphics mtext
 #' @importFrom graphics par
 #' @importFrom utils read.csv
+#' @importFrom magrittr %>%
+#' @import tibble
+#' @importFrom dplyr arrange
 NULL
 
 

@@ -51,13 +51,12 @@ load_imageset_ef <- function(path, imgDim) {
 #'
 #' @examples
 #' # Load classes of Olivetti-Dataset
-#' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
+#' olivetti <- system.file("extdata","olivetti_y.csv",package="eigenfaces")
 #' classes <- load_classes_ef(olivetti)
 load_classes_ef <- function(path) {
   data <- read.csv(path, header=FALSE)
   data
 }
-
 
 #' Creates an Object of class 'imageset_ef'
 #'
@@ -225,7 +224,6 @@ subtract_avg_face <- function(td) {
 #' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
 #' td <- load_imageset_ef(olivetti, c(64,64))
 #' PCA(td, showEigenvals = FALSE, quick=FALSE)
-
 PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
   force(quick)
   stopifnot("td must be of class 'imageset_ef'" = is.imageset_ef(td))

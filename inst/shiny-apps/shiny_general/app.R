@@ -3,7 +3,7 @@ library(shiny)
 ui <- fluidPage(
 
   # App title ----
-  titlePanel("Visualize Eigenfaces"),
+  titlePanel("Visualize Dataset"),
 
   # Sidebar layout with input and output definitions ----
   sidebarLayout(
@@ -13,28 +13,21 @@ ui <- fluidPage(
 
       # Input: Slider for the number of person ----
       sliderInput(inputId = "person",
-                  label = "Number of Person:",
+                  label = "Number of Image:",
                   min = 1,
-                  max = 40,
+                  max = length(td),
                   value = 30),
-
-      # Input: Slider for the perspective of person ----
-      sliderInput(inputId = "perspective",
-                  label = "Perspective of Person:",
-                  min = 1,
-                  max = 10,
-                  value = 2),
 
       # Input: Slider for the nr of used ef to reconstruct ----
       sliderInput(inputId = "n_recon",
-                  label = "Amount of Eigenfaces used for Reconstruction:",
+                  label = "Amount of Eigenvectors used for Reconstruction:",
                   min = 1,
                   max = length(ef),
                   value = 3),
 
       # Input: Slider for the eigenface number ----
       sliderInput(inputId = "n_eigen",
-                  label = "Eigenface Number:",
+                  label = "Eigenvector Number:",
                   min = 1,
                   max = length(ef),
                   value = 1)
@@ -46,11 +39,11 @@ ui <- fluidPage(
     mainPanel(
 
       # Output:
-      h3("Original and Reconstructed Face"),
+      h3("Original and Reconstructed Image"),
       fluidRow(splitLayout(style = "border: 1px solid silver:", cellWidths = c(200,200),
                            plotOutput(outputId = "face", width = 200, height =200),
                            plotOutput(outputId = "reconstruction", width = 200, height =200))),
-      h3("Eigenface"),
+      h3("Eigenvector"),
       plotOutput(outputId = "eigenface", width = 200, height = 200)
 
     )
@@ -62,7 +55,7 @@ server <- function(input, output) {
 
   output$face <- renderPlot({
     par(mar = c(0,0,0,0))
-    td[[input$person*10 + input$perspective]]
+    td[[input$person]]
   })
 
   output$eigenface <- renderPlot({
@@ -72,7 +65,7 @@ server <- function(input, output) {
 
   output$reconstruction <- renderPlot({
     par(mar = c(0,0,0,0))
-    FSP(td[[input$person*10 + input$perspective]],
+    FSP(td[[input$person]],
         ef[1:input$n_recon], avg_face(normalize(td)))
   })
 

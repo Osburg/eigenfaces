@@ -78,8 +78,9 @@ server <- function(input, output) {
 
   output$reconstruction <- renderPlot({
     par(mar = c(0,0,0,0))
-    FSP(td[[input$person*10 + input$perspective]],
-        ef[1:input$n_recon], avg_face(normalize(td)))
+    ef_part <- ef[1:input$n_recon]
+    class(ef_part) <- "imageset_ef"
+    FSP(td[[input$person*10 + input$perspective]], ef_part, avg_face(normalize(td)))
   })
 
 }

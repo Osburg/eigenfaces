@@ -5,6 +5,9 @@
 #TODO: ?-Eintrag
 #TODO: Test
 #TODO: Fehler, warnings
+
+
+#' @export
 imgShow_ef <- function(img) {
   img %>%
     apply(1, rev) %>%

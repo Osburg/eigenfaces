@@ -23,3 +23,7 @@ Depends:
     magrittr,
     dplyr,
     tibble
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

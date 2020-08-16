@@ -28,22 +28,22 @@ To run this project,...
 Nine examples of the images in the Olivetti Dataset:
 (plots created with [this code](https://github.com/Osburg/eigenfaces/blob/master/R/visualize_ef.R).)
 
-![Example of Images in Olivetti Dataset](https://github.com/Osburg/eigenfaces/blob/master/example_images.png)
+![Example of Images in Olivetti Dataset](https://github.com/Osburg/eigenfaces/blob/master/inst/extdata/example_images.png)
 
 ---
 
 First nine eigenfaces of the Olivetti Dataset:
 (plots created with [this code](https://github.com/Osburg/eigenfaces/blob/master/R/visualize_ef.R).)
 
-![Nine Eigenfaces of the Olivetti Dataset](https://github.com/Osburg/eigenfaces/blob/master/nine_eigenfaces.png)
+![Nine Eigenfaces of the Olivetti Dataset](https://github.com/Osburg/eigenfaces/blob/master/inst/extdata/nine_eigenfaces.png)
 
 ---
 
 Projection of images onto the first two eigenfaces:
 (plots created with [this code](https://github.com/Osburg/eigenfaces/blob/master/R/visualize_ef.R).)
 
-![Projection on eigenfaces](https://github.com/Osburg/eigenfaces/blob/master/projection_blue.png)
-![Projection on eigenfaces](https://github.com/Osburg/eigenfaces/blob/master/projection_rainbow.png)
+![Projection on eigenfaces](https://github.com/Osburg/eigenfaces/blob/master/inst/extdata/projection_blue.png)
+![Projection on eigenfaces](https://github.com/Osburg/eigenfaces/blob/master/inst/extdata/projection_rainbow.png)
 
 ## Sources 
 This Project is inspired by Marinovsky F., Wagner P., Gesichtserkennung mit Eigenfaces, FH Zittau/Görlitz

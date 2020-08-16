@@ -22,14 +22,14 @@ ui <- fluidPage(
       sliderInput(inputId = "n_recon",
                   label = "Amount of Eigenvectors used for Reconstruction:",
                   min = 1,
-                  max = length(ef),
+                  max = 400,
                   value = 3),
 
       # Input: Slider for the eigenface number ----
       sliderInput(inputId = "n_eigen",
                   label = "Eigenvector Number:",
                   min = 1,
-                  max = length(ef),
+                  max = 400,
                   value = 1)
 
     ),

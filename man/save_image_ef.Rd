@@ -4,7 +4,7 @@
 \alias{save_image_ef}
 \title{Save image}
 \usage{
-save_image_ef(im, filename, filetype, path = default)
+save_image_ef(im, filename, filetype, path = NULL)
 }
 \arguments{
 \item{im}{arr, array-like structure}
@@ -22,6 +22,7 @@ save_image_ef(im, filename, filetype, path = default)
 Save any suitable array as image.
 }
 \examples{
-td <- load_any_imageset("testfiles", "jpg")
-save_image_ef(td[[3]], "test_save", "jpg", path = "inst/extdata/testfiles")
+folder <- system.file("extdata","testfiles",package="eigenfaces")
+td <- load_any_imageset(folder, "jpg")
+save_image_ef(td[[3]], "test_save", "jpg", path = folder)
 }

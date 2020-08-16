@@ -21,6 +21,7 @@ eigenvectors.
 }
 \examples{
 # Opens Shiny App for (e.g.) MNIST Dataset
-td <- load_imageset_ef("inst/extdata/mnist_X.csv", c(28,28))
+mnist <- system.file("extdata","mnist_X.csv",package="eigenfaces")
+td <- load_imageset_ef(mnist, c(28,28))
 runShiny_general(td)
 }

@@ -13,8 +13,8 @@
 #' @export
 #'
 #' @examples
-#' td <- load_any_imageset("inst/extdata/testfiles", "jpg")
-#' imageShow_ef(td[[1]])
+#' folder <- system.file("extdata","testfiles",package="eigenfaces")
+#' td <- load_any_imageset(folder, "jpg")
 load_any_imageset <- function(folderpath, filetype) {
   filepath <- paste(folderpath, "/",
                      list.files(path = folderpath, pattern=paste("*.",filetype,sep="")),
@@ -56,14 +56,15 @@ load_any_imageset <- function(folderpath, filetype) {
 #' @export
 #'
 #' @examples
-#' td <- load_any_imageset("testfiles", "jpg")
-#' save_image_ef(td[[3]], "test_save", "jpg", path = "inst/extdata/testfiles")
-save_image_ef <- function(im, filename, filetype, path = default) {
+#' folder <- system.file("extdata","testfiles",package="eigenfaces")
+#' td <- load_any_imageset(folder, "jpg")
+#' save_image_ef(td[[3]], "test_save", "jpg", path = folder)
+save_image_ef <- function(im, filename, filetype, path = NULL) {
   # Turn array into cimg for library imager
   dim(im) <- c(dim(im), 1, 1)
   im <- as.cimg(im)
 
-  if (deparse(substitute(path)) == "default") {
+  if (is.null(path)) {
     save.image(im, paste(filename, ".", filetype, sep = ""))
   }
   else {

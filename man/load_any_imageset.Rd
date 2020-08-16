@@ -19,6 +19,6 @@ Makes it possible to not only load .csv files (as in the case of the Olivetti
 Dataset) but also to load seperate .png, .jpeg or .bmp files as an imageset.
 }
 \examples{
-td <- load_any_imageset("inst/extdata/testfiles", "jpg")
-imageShow_ef(td[[1]])
+folder <- system.file("extdata","testfiles",package="eigenfaces")
+td <- load_any_imageset(folder, "jpg")
 }

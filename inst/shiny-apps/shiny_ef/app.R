@@ -1,4 +1,10 @@
-library(shiny)
+#library(shiny)
+
+olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
+cat("Loading dataset...\n")
+td <- load_imageset_ef(olivetti, c(64,64))
+cat("Getting Eigenfaces...\n")
+ef <- get_eigenfaces(td, 400, quick = FALSE) #auf FALSE aendern fuer finale Version
 
 ui <- fluidPage(
 

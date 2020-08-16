@@ -50,8 +50,5 @@ runShiny_ef <- function() {
 #' td <- load_imageset_ef(mnist, c(28,28))
 #' runShiny_general(td)
 runShiny_general <- function(td) {
-  cat("Getting Eigenvectors...\n")
-  #ef <- get_eigenfaces(td, 400, quick = FALSE) #auf FALSE aendern fuer finale Version
-
   shiny::runApp("inst/shiny-apps/shiny_general")
 }

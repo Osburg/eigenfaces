@@ -1,5 +1,6 @@
 #library(shiny)
 
+cat("Getting Eigenvectors...\n")
 ef <- get_eigenfaces(td, 400, quick = FALSE) #auf FALSE aendern fuer finale Version
 
 ui <- fluidPage(

@@ -6,7 +6,7 @@ imgShow_ef <- function(img) {
   img %>%
     apply(1, rev) %>%
     t() %>%
-    image(col=hcl.colors(12, "Grays", rev = FALSE))
+    image(col=hcl.colors(12, "Grays", rev = FALSE),xaxt="n",yaxt="n")
 }
 
 #Liest eine .csv-Datei der folgenden Struktur ein und gibt sie als n x dimension - Array wieder aus
@@ -25,6 +25,7 @@ csv_to_array_ef <- function(path, dimension = c(64,64)) {
 #'
 #' @param obj an object to be normalized (e.g. of class 'image_ef', 'imageset_ef')
 #' @param ... additional arguments
+#' @export
 normalize <- function(obj, ...) UseMethod("normalize")
 
 #' Feature Space Projection

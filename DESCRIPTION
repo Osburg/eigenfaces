@@ -23,8 +23,7 @@ Depends:
     magrittr,
     dplyr,
     tibble,
-    testthat,
-    imager
+    testthat
 Suggests: 
     knitr,
     rmarkdown

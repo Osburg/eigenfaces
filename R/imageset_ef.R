@@ -122,12 +122,13 @@ is.imageset_ef <- function(td) {
 #' @param ... additional arguments
 #'
 #' @return Returns normalized version of td.
-# #' @examples
-# #' # Import Olivetti-faces
-# #' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
-# #' td <- load_imageset_ef(olivetti, c(64,64))
-# #' # Normalize
-# #' normalize(td)
+#' @export
+#' @examples
+#' # Import Olivetti-faces
+#' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
+#' td <- load_imageset_ef(olivetti, c(64,64))
+#' # Normalize
+#' normalize(td)
 normalize.imageset_ef <- function(obj, ...) {
   stopifnot("obj must be of class 'imageset_ef'" = is.imageset_ef(obj))
   stopifnot("obj must be at least of length 1" = length(obj)>0)
@@ -282,7 +283,6 @@ PCA <- function(td, showEigenvals = TRUE, quick = FALSE) {
 #' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
 #' td <- load_imageset_ef(olivetti, c(64,64))
 #' get_eigenfaces(td, 9)
-#' PCA(td,showEigenvals=FALSE, quick=TRUE)
 #' @references Marinovsky F., Wagner P., Gesichtserkennung mit Eigenfaces, FH Zittau/Görlitz
 #' @export
 get_eigenfaces <- function(td, nfaces = 15, quick = FALSE) {

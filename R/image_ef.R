@@ -49,8 +49,9 @@ is.image_ef <- function(img) {is.numeric(img) && is.element("image_ef", class(im
 #' Subtracts the mean over all pixel from every single pixel and returns the result.
 #'
 #' @param obj An object of class 'image_ef'.
-#' @param ... addiotional arguments
+#' @param ... additional arguments
 #' @return An object of class 'image_ef'. The pixel values are those of img minus the mean over all pixels of img.
+#' @export
 #' @references https://www.bytefish.de/pdf/eigenfaces.pdf
 normalize.image_ef <- function(obj, ...) {
   stopifnot("Eingabe muss ein image_ef sein" = is.image_ef(obj))

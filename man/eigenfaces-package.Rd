@@ -4,15 +4,19 @@
 \name{eigenfaces-package}
 \alias{eigenfaces}
 \alias{eigenfaces-package}
-\title{eigenfaces: PCA on Eigenfaces}
+\title{Eigenface package}
 \description{
 Performs PCA and multiple sidetasks on the Olivetti-Dataset or 
     similar datasets.
 }
-\section{}{
-NA
-}
+\details{
+The package contains the principal component analyses of a Dataset of face images (here: Olivetti Data).
+         It provides several functionalities:
 
+         * output of the n important Eigenfaces of a Dataset
+         * Finding of similar faces for a given new face by projection on the main components.
+         * Presentation of figures from the Dataset with reduced number of main components.
+}
 \references{
 \url{https://www.bytefish.de/pdf/eigenfaces.pdf}
 }

@@ -1,11 +1,11 @@
-# # #library(tidyverse)
-# # source("R/helperFunctions_ef.R")
-# # source("R/imageset_ef.R")
-# # source("R/image_ef.R")
-# # source("R/FeatureSpaceProjection.R")
-# #
-# # Import Olivetti
+# #library(tidyverse)
+# source("R/helperFunctions_ef.R")
+# source("R/imageset_ef.R")
+# source("R/image_ef.R")
+# source("R/FeatureSpaceProjection.R")
 #
+# Import Olivetti
+
 td <- load_imageset_ef("inst/extdata/olivetti_X.csv", c(64,64))
 classes <- load_classes_ef("inst/extdata/olivetti_y.csv")
 

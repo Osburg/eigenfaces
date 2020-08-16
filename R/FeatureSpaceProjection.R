@@ -12,7 +12,7 @@ proj <- function(x,y) {
   y <- as.vector(y)
 
   #Normiere y
-  y <- y / sqrt(dot(y,y))
+  y <- y / dot(y,y)
 
   dot(x,y)
 }

@@ -9,7 +9,7 @@
 \arguments{
 \item{obj}{An object of class 'image_ef'.}
 
-\item{...}{addiotional arguments}
+\item{...}{additional arguments}
 }
 \value{
 An object of class 'image_ef'. The pixel values are those of img minus the mean over all pixels of img.

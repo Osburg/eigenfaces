@@ -1,7 +1,6 @@
 #Run shiny
 
-# #' @export
-# runShiny <- function() {
+# # runShiny <- function() {
 #   appDir <- system.file("shiny-apps", "shiny_ef", package = "eigenfaces")
 #   if (appDir == "") {
 #     stop("Could not find directory. Try re-installing `eigenfaces`.", call. = FALSE)

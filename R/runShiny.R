@@ -1,14 +1,14 @@
 #Run shiny
 
-#' @export
-runShiny <- function() {
-  appDir <- system.file("shiny-apps", "shiny_ef", package = "eigenfaces")
-  if (appDir == "") {
-    stop("Could not find directory. Try re-installing `eigenfaces`.", call. = FALSE)
-  }
-
-  shiny::runApp(appDir, display.mode = "normal")
-}
+# #' @export
+# runShiny <- function() {
+#   appDir <- system.file("shiny-apps", "shiny_ef", package = "eigenfaces")
+#   if (appDir == "") {
+#     stop("Could not find directory. Try re-installing `eigenfaces`.", call. = FALSE)
+#   }
+#
+#   shiny::runApp(appDir, display.mode = "normal")
+# }
 
 
 
@@ -27,14 +27,6 @@ runShiny <- function() {
 #' # Opens Shiny App for Olivetti Dataset
 #' runShiny_ef()
 runShiny_ef <- function() {
-  source("R/helperFunctions_ef.R")
-  source("R/imageset_ef.R")
-  source("R/image_ef.R")
-  source("R/FeatureSpaceProjection.R")
-
-  td <<- load_imageset_ef("inst/extdata/olivetti_X.csv", c(64,64))
-  ef <<- get_eigenfaces(td, 400, quick = FALSE) #auf FALSE aendern fuer finale Version
-
   shiny::runApp("inst/shiny-apps/shiny_ef")
 }
 
@@ -55,17 +47,12 @@ runShiny_ef <- function() {
 #'
 #' @examples
 #' # Opens Shiny App for (e.g.) MNIST Dataset
-#' td <- load_imageset_ef("inst/extdata/mnist_X.csv", c(28,28))
+#' mnist <- system.file("extdata","mnist_X.csv",package="eigenfaces")
+#' td <- load_imageset_ef(mnist, c(28,28))
 #' runShiny_general(td)
 runShiny_general <- function(td) {
-  source("R/helperFunctions_ef.R")
-  source("R/imageset_ef.R")
-  source("R/image_ef.R")
-  source("R/FeatureSpaceProjection.R")
 
-  #td <<- load_imageset_ef("inst/extdata/mnist_X.csv", c(28,28))
-  td <<- td
-  ef <<- get_eigenfaces(td, 400, quick = FALSE) #auf FALSE aendern fuer finale Version
+  ef <- get_eigenfaces(td, 400, quick = FALSE) #auf FALSE aendern fuer finale Version
 
   shiny::runApp("inst/shiny-apps/shiny_general")
 }

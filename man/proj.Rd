@@ -17,6 +17,3 @@ scalar product of x with unit vector in y-direction
 \description{
 Projection of a vector onto a unit vector
 }
-\examples{
-proj(c(1,1,1), c(1,0,0))
-}

@@ -18,6 +18,6 @@ the dataset.
 }
 \examples{
 # Load classes of Olivetti-Dataset
-olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
+olivetti <- system.file("extdata","olivetti_y.csv",package="eigenfaces")
 classes <- load_classes_ef(olivetti)
 }

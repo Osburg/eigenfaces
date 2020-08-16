@@ -4,7 +4,7 @@
 \alias{FSP}
 \title{Feature Space Projection}
 \usage{
-FSP(obj, eigenfaces, avgFace, showCoefficients = TRUE)
+FSP(obj, eigenfaces, avgFace, showCoefficients = TRUE, ...)
 }
 \arguments{
 \item{obj}{an object to be proected on eigenfaces (e.g. of class 'image_ef', 'imageset_ef')}
@@ -13,7 +13,9 @@ FSP(obj, eigenfaces, avgFace, showCoefficients = TRUE)
 
 \item{avgFace}{an object of class 'image_ef'. Average face of the underlying imageset_ef}
 
-\item{showCoefficients}{a logical vector of length 1 (TRUE or FALSE). Determines whether to additionally return the coefficients of the linear combination representing obj.
+\item{showCoefficients}{a logical vector of length 1 (TRUE or FALSE). Determines whether to additionally return the coefficients of the linear combination representing obj.}
+
+\item{...}{additional arguments
 
 For details see FSP.image_ef and FSP.imageset_ef}
 }

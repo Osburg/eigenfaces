@@ -16,10 +16,3 @@ Returns td - average face.
 Makes use of avg_face() function to subtract the average data (here: face)
 of a given data set.
 }
-\examples{
-# Import Olivetti-faces
-olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
-td <- load_imageset_ef(olivetti, c(64,64))
-# Subtract
-subtract_avg_face(td)
-}

@@ -30,6 +30,6 @@ For further explanation see \code{?PCA}.
 olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
 td <- load_imageset_ef(olivetti, c(64,64))
 img <- td[[1]]
-closest <- classification_ef(img, td)
+closest <- classification_ef(img, td, quick = TRUE)
 
 }

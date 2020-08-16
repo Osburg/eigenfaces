@@ -4,10 +4,12 @@
 \alias{normalize}
 \title{Normalization}
 \usage{
-normalize(obj)
+normalize(obj, ...)
 }
 \arguments{
 \item{obj}{an object to be normalized (e.g. of class 'image_ef', 'imageset_ef')}
+
+\item{...}{additional arguments}
 }
 \description{
 Normalization

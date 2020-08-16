@@ -4,12 +4,12 @@
 \alias{print.image_ef}
 \title{Show an image_ef object as image in the plots section}
 \usage{
-\method{print}{image_ef}(img, ...)
+\method{print}{image_ef}(x, ...)
 }
 \arguments{
-\item{img}{An image_ef object.}
+\item{x}{An image_ef object.}
 
-\item{...}{TODO}
+\item{...}{additional arguments}
 }
 \description{
 An implementation of the \code{print} function for 'image_ef' objects.

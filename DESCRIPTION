@@ -22,7 +22,8 @@ Depends:
     shiny,
     magrittr,
     dplyr,
-    tibble
+    tibble,
+    testthat
 Suggests: 
     knitr,
     rmarkdown

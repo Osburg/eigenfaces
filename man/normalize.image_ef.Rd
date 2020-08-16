@@ -4,19 +4,18 @@
 \alias{normalize.image_ef}
 \title{Normalization of an object of class 'image_ef'}
 \usage{
-\method{normalize}{image_ef}(img)
+\method{normalize}{image_ef}(obj, ...)
 }
 \arguments{
-\item{img}{An object of class 'image_ef'.}
+\item{obj}{An object of class 'image_ef'.}
+
+\item{...}{addiotional arguments}
 }
 \value{
 An object of class 'image_ef'. The pixel values are those of img minus the mean over all pixels of img.
 }
 \description{
 Subtracts the mean over all pixel from every single pixel and returns the result.
-}
-\examples{
-normalize(image_ef(c(1,0,1,0)))
 }
 \references{
 https://www.bytefish.de/pdf/eigenfaces.pdf

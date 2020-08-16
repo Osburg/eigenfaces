@@ -1,26 +1,9 @@
-#library(tidyverse)
-# source("R/helperFunctions_ef.R")
-# source("R/imageset_ef.R")
-# source("R/image_ef.R")
-# source("R/FeatureSpaceProjection.R")
-
 #' Euclidean distance between the coefficient vectors of the projection of two images
 #'
 #' @param coeffs1 numeric vector, first coefficient vector
 #' @param coeffs2 numeric vector, second coefficient vector
 #'
 #' @return numeric vector of length 1, the euclidean distance of \code{coeffs1} and \code{coeffs2}
-#' @export
-#' @examples
-#' # Import Olivetti-faces
-#' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
-#' td <- load_imageset_ef(olivetti, c(64,64))
-#' #compute coefficients
-#' eigenfaces <- get_eigenfaces(td, nfaces = 50)
-#' avgFace <- avg_face(td)
-#' coeffs1 <- FSP(td[[1]], eigenfaces, avgFace, showCoefficients=TRUE)[[2]]
-#' coeffs2 <- FSP(td[[2]], eigenfaces, avgFace, showCoefficients=TRUE)[[2]]
-#' distance_ef(coeffs1, coeffs2)
 distance_ef <- function(coeffs1, coeffs2) {
   stopifnot("coeffs1 must be numeric" = is.numeric(coeffs1))
   stopifnot("coeffs2 must be numeric" = is.numeric(coeffs2))
@@ -54,7 +37,7 @@ distance_ef <- function(coeffs1, coeffs2) {
 #' olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
 #' td <- load_imageset_ef(olivetti, c(64,64))
 #' img <- td[[1]]
-#' closest <- classification_ef(img, td)
+#' closest <- classification_ef(img, td, quick = TRUE)
 #'
 #' @export
 classification_ef <- function(img, td, nclosest = 3, neigenfaces = 15, quick = FALSE) {

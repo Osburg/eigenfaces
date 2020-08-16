@@ -4,16 +4,18 @@
 \alias{FSP.image_ef}
 \title{Projection of an 'image_ef' object onto a set of orthogonal eigenfaces}
 \usage{
-\method{FSP}{image_ef}(img, eigenfaces, avgFace, showCoefficients = FALSE)
+\method{FSP}{image_ef}(obj, eigenfaces, avgFace, showCoefficients = FALSE, ...)
 }
 \arguments{
-\item{img}{an object of class 'image_ef'}
+\item{obj}{an object of class 'image_ef'}
 
 \item{eigenfaces}{an object of class 'imageset_ef', eigenfaces of an 'imageset_ef' object td}
 
 \item{avgFace}{an object of class 'image_ef', average face of td}
 
 \item{showCoefficients}{(optional) logical vector of length 1 (TRUE or FALSE)}
+
+\item{...}{additional arguments}
 }
 \value{
 case \code{showCoefficients=FALSE}: a list of length 1 containing an object of class 'image_ef',
@@ -31,7 +33,7 @@ face is substracted before the projection and added onto the projection afterwar
 olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
 td <- load_imageset_ef(olivetti, c(64,64))
 img <- td[[42]]
-eigenfaces <- get_eigenfaces(td, nfaces = 50)
+eigenfaces <- get_eigenfaces(td, nfaces = 50, quick=TRUE)
 avgFace <- avg_face(td)
 projection <- FSP(img, eigenfaces, avgFace, showCoefficients=FALSE)[[1]]
 }

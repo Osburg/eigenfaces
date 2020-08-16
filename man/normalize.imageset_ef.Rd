@@ -4,21 +4,16 @@
 \alias{normalize.imageset_ef}
 \title{Normalization of an imageset_ef}
 \usage{
-\method{normalize}{imageset_ef}(td)
+\method{normalize}{imageset_ef}(obj, ...)
 }
 \arguments{
-\item{td}{List of arrays. Training data.}
+\item{obj}{List of arrays. Training data.}
+
+\item{...}{additional arguments}
 }
 \value{
 Returns normalized version of td.
 }
 \description{
 Normalizes all entries in the imageset_ef list.
-}
-\examples{
-# Import Olivetti-faces
-olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
-td <- load_imageset_ef(olivetti, c(64,64))
-# Normalize
-normalize(td)
 }

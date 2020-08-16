@@ -1,5 +1,3 @@
-# Temporary file
-
 #library(tidyverse)
 #library(imager)
 
@@ -15,7 +13,7 @@
 #' @export
 #'
 #' @examples
-#' td <- load_any_imageset("testfiles", "jpg")
+#' td <- load_any_imageset("inst/extdata/testfiles", "jpg")
 #' imageShow_ef(td[[1]])
 load_any_imageset <- function(folderpath, filetype) {
   filepath <- paste(folderpath, "/",
@@ -43,7 +41,6 @@ load_any_imageset <- function(folderpath, filetype) {
   td
 }
 
-#td <- load_any_imageset("testfiles", "jpg")
 
 
 #' Save image
@@ -60,11 +57,8 @@ load_any_imageset <- function(folderpath, filetype) {
 #'
 #' @examples
 #' td <- load_any_imageset("testfiles", "jpg")
-#' save_image_ef(td[[3]], "test_save", "jpg", path = "testfiles")
+#' save_image_ef(td[[3]], "test_save", "jpg", path = "inst/extdata/testfiles")
 save_image_ef <- function(im, filename, filetype, path = default) {
-
-  # NEED TO BE TESTED ON FOR EXAMPLE EIGENFACES
-
   # Turn array into cimg for library imager
   dim(im) <- c(dim(im), 1, 1)
   im <- as.cimg(im)
@@ -77,5 +71,5 @@ save_image_ef <- function(im, filename, filetype, path = default) {
   }
 }
 
-#save_image_ef(td[[3]], "test_save", "jpg", "testfiles")
+
 

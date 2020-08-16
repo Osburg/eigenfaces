@@ -1,0 +1,192 @@
+---
+title: "Eigenfaces"
+author: Aaron Osburg, Marcel Fischer, Ida Jandl
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, include=FALSE}
+library(eigenfaces)
+
+```
+
+In diesem Paket wird die Hauptkomponentenanalyse auf den Olivetti Datensatz angewendet. Die in diesem Zusammenhang gefundenen Eigenvektoren werden Eigengesichter genannt.
+Das Paket stellt folgende Funktionen bereit:
+
+
+* Ausgabe der wichtigsten n Eigengesichter eines Datensatzes  
+* Darstellung von Bildern im Datensatz mit reduzierter Anzahl an Hauptkomponenten    
+* Finden ähnlicher Gesichter für ein gegebenes neues Gesicht durch Projektion auf die Hauptkomponenten
+
+
+## Allgemeines  
+
+Die Idee der maschinelle Gesichtserkennung mit der Technik der Hauptkomponentenanalyse stammt von Turk und Pentland, 1991. Sie haben ausgenutzt, dass Gesichter der Menschen Ähnlichkeiten aufweisen, sodass man sie in einen niedrigdimensionalen Raum mithilfe von Eigenvektoren, genannt Eigengesichter beschreiben kann. 
+
+## Hauptkomponentenanalyse
+
+Die Hauptkomponentenanalyse geht von einer statistischen Verteilung eines Datensets aus. Da Gesichter charakteristische Merkmale aufweisen, lässt sich somit das Verfahren sehr gut darauf anwenden.
+Um die Hauptkomponentenanalyse durchführen zu können, müssen die Gesichter normalisiert werden. Danach wird das Durchschnittsgesicht $\bar{X}$ aus dem kompletten Datenset von $x_i$ Gesichtern berechnet. 
+
+$\bar{X} = \frac{1}{n}\sum_{i=1}^{n} x_i$
+
+Als nächster Schritt wird das erhaltene Durchschnittsgesicht von jedem Gesicht abgezogen.  
+
+$B =  \sum_{i=1}^{n} x_i - \bar{X}$
+
+Dadurch erhält man eine Matrix B, die alle Abweichungen zum Durchschnittsgesichts wiedergibt. 
+Aus der Kovarianzmatrix C   
+
+$C= B^t B$    
+
+lassen sich die Eigenvektoren berechnen, die Eigengesichter genannt werden.   
+Die ersten Eigengesichter geben die Lichtverhältnisse an, die nächsten die Frisur oder Mimik. Eigengesichter bilden somit die Grundstruktur ein Gesicht zu rekonstruieren. Diese ist für jeden Datensatz gleich. 
+
+## Olivetti Datensatz
+In unserem Paket verwenden wir unter anderem den Olivetti Datensatz. 
+Der Datensatz wurde zwischen April 1992 und April 1994 erstellt und umfasst 400 Gesichtsfotos. Insgesamt wurden 40 verschiedene Personen zu 10 verschiedenen Zeiten mit varrierendem Lichteinfall, Gesichtsausdrücken, und Gesichtsdetails fotografiert.  Alle Gesichter haben einen schwarzen Hintergrund und sind schwarz-weiß fotografiert. Die Größe beträgt 64 * 64. 
+Die Personen sind durchnummeriert von 1 bis 40.
+Weitere Informationen erhält man mit ?Olivetti. 
+Der Datensatz lässt sich mit `load_imageset_ef(lst)` importieren. 
+
+``` {r eval=FALSE}
+library(eigenfaces)
+olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
+td <- load_imageset_ef(olivetti, c(64,64))
+td[[1]] 
+```
+``` {r echo=FALSE, out.width = '30%'}
+library(knitr)
+olivetti <- system.file("extdata","td1.png",package="eigenfaces")
+
+include_graphics(olivetti)
+```
+   
+Man erhält das erste Bild der ersten Person des Datensets.
+
+``` {r eval=FALSE}
+par(mfrow=c(4,10),pin=c(1,1),mar=c(1,1,1,1))
+for (i in 1:4) {
+  for(j in 1:10){
+      idx <- (i-1)*10 + j
+       td[[idx]]%>%apply(1, rev) %>%t() %>%image(col=hcl.colors(12, "Grays", rev = FALSE))}}
+```
+``` {r echo=FALSE, out.width = '90%'}
+ library(knitr)
+olivetti <- system.file("extdata","Olivettidata2.png",package="eigenfaces")
+
+include_graphics(olivetti)
+```
+
+Die ersten 40 Bilder des Olivetti Datensatzes. Die Spalten sind nach Personen und die Reihen sind nach den 10 unterschiedlichen Fotos der Personen sortiert.  
+
+
+## Ausgabe der wichtigsten n Eigengesichter eines Datensatzes
+
+Um die n Eigengesichter zu erhalten, wendet man nun die Hauptkomponentenanalyse auf den Datensatz an.
+
+Das Durchschnittsgesicht erhält man mit der Funktion `avg_face(td)` (siehe `?avg_face`).
+
+```{r eval=FALSE}
+avg_face(td)
+```
+``` {r echo=FALSE,out.width = '30%'}
+library(knitr)
+olivetti <- system.file("extdata","avgface.png",package="eigenfaces")
+
+include_graphics(olivetti)
+```
+
+Die Funktion `get_eigenfaces(td, nfaces = 15, quick = FALSE)` gibt nfaces viele Eigengesichter des Datensatzes aus. 
+
+```{r eval=FALSE}
+ef <- get_eigenfaces(td, 9)
+par(mfrow=c(3,3),pin=c(1,1),mar=c(1,1,1,1))
+   for (i in 1:9) {
+          ef[[i]]%>%apply(1, rev) %>%t() %>%image(col=hcl.colors(12, "Grays", rev = FALSE))}
+```
+
+``` {r echo=FALSE,out.width = '50%'}
+library(knitr)
+olivetti <- system.file("extdata","eigenfaces.png",package="eigenfaces")
+
+include_graphics(olivetti)
+```
+
+Mit `get_eigenfaces(td, 9)` erhält man somit die ersten neun Eigengesichter. 
+
+## Darstellung von Bildern im Datensatz mit reduzierter Anzahl an Hauptkomponenten
+
+Mit den Eigengesichtern lassen sich neue Gesichter rekonstruieren. Wählt man ein neues Gesicht aus und projeziert es in die Hauptkomponente, so lässt sich das Gesicht mittels des Durchschnittsgesicht und der Linearkombination von Eigenvektoren rekonstruieren. Die dazugehörige Funktion heißt `FSP(img, eigenfaces, avgFace, showCoefficients = FALSE)` (siehe `?FSP`). 
+
+```{r eval=FALSE}
+par(mfrow=c(1,5),pin=c(1,1),mar=c(1,1,1,1))
+ef <- get_eigenfaces(td, 1)
+FSP(td[[5]], ef, avg_face(normalize(td)))
+ef <- get_eigenfaces(td, 5)
+FSP(td[[5]], ef, avg_face(normalize(td)))
+ef <- get_eigenfaces(td, 25)
+FSP(td[[5]], ef, avg_face(normalize(td)))
+ef <- get_eigenfaces(td, 100)
+FSP(td[[5]], ef, avg_face(normalize(td)))
+ef <- get_eigenfaces(td, 400)
+FSP(td[[5]], ef, avg_face(normalize(td)))
+
+```
+
+``` {r echo=FALSE, out.width = '90%'}
+library(knitr)
+olivetti <- system.file("extdata","geteigenfacestd5.png",package="eigenfaces")
+
+include_graphics(olivetti)
+```
+
+man erhält die Rekonstruktion von links nach rechts mit 1,5,25,100,400 Eigengesichtern, von dem fünften Foto der ersten Person.
+Das dritte Bild der 4 Person lasst sich wie mit `FSP(td[[33]], ef, avg_face(normalize(td)))` analog rekonstruieren: 
+
+``` {r echo=FALSE, out.width = '90%'}
+library(knitr)
+olivetti <- system.file("extdata","geteigenfacestd33.png",package="eigenfaces")
+
+include_graphics(olivetti)
+```
+
+
+## Finden ähnlicher Gesichter für ein gegebenes neues Gesicht durch Projektion auf die Hauptkomponenten
+
+Nimmt man ein neues Gesicht und projeziert es auf die Hauptkomponenten, so kann man durch den Vergleich der Koeffizienten Bilder mit euklidisch nahen Koeffizienten auswählen. 
+Damit kann man nun die Eigengesichter zur Gesichtserkennung benutzen. 
+Für ein gegebenes neues Foto einer Person, welche schon im Datensatz aufgetaucht ist, erhält man durch die Funktion `classification_ef(img, td, nclosest = 3, neigenfaces = 15, quick = FALSE)` (siehe `?classification_ef`) die 3 nächsten Bilder, die dieser Person ähnlich sehen. Dadurch lassen sich Personen wiederfinden, obwohl sie eine andere Mimik, oder andere Gesichtsmerkmale (wie Brille) aufweisen. Der Code
+
+```{r eval=FALSE}
+olivetti <- system.file("extdata","olivetti_X.csv",package="eigenfaces")
+td <- load_imageset_ef(olivetti, c(64,64))
+img <- td[[33]]
+closest <- classification_ef(img, td)
+```
+
+``` {r echo=FALSE, out.width = '90%'}
+library(knitr)
+olivetti <- system.file("extdata","closest_td33.png",package="eigenfaces")
+
+include_graphics(olivetti)
+```
+
+ergibt die drei nächstliegenden Bilder des dritten Fotos der vierten Person. 
+ 
+## Referenzen: 
+
+<https://www.bytefish.de/pdf/eigenfaces.pdf>   
+<https://de.wikipedia.org/wiki/Hauptkomponentenanalyse>   
+ <https://en.wikipedia.org/wiki/Eigenface>    
+<https://www.kaggle.com/serkanpeldek/face-recognition-on-olivetti-dataset>

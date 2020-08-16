@@ -24,3 +24,7 @@ Depends:
     dplyr,
     tibble,
     testthat
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

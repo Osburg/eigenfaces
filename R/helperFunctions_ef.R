@@ -1,4 +1,7 @@
 #Gibt eine Matrix img als Bild in Graustufen (und nicht auf dem Kopf wie image()) aus
+
+
+
 imgShow_ef <- function(img) {
   img %>%
     apply(1, rev) %>%

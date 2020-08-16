@@ -1,5 +1,3 @@
-# Temporary file
-
 #library(tidyverse)
 #library(imager)
 

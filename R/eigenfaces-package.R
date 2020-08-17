@@ -16,6 +16,7 @@
 #' @import tidyverse
 #' @import pracma
 #' @import shiny
+#' @import imager
 #' @importFrom grDevices hcl.colors
 #' @importFrom graphics image
 #' @importFrom graphics mtext

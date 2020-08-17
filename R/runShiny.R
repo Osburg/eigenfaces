@@ -1,16 +1,5 @@
 #Run shiny
 
-# # runShiny <- function() {
-#   appDir <- system.file("shiny-apps", "shiny_ef", package = "eigenfaces")
-#   if (appDir == "") {
-#     stop("Could not find directory. Try re-installing `eigenfaces`.", call. = FALSE)
-#   }
-#
-#   shiny::runApp(appDir, display.mode = "normal")
-# }
-
-
-
 #' Run Shiny App for Olivetti Dataset
 #'
 #' Opens customized shiny app for the Olivetti Dataset. No need to load Dataset
@@ -50,5 +39,7 @@ runShiny_ef <- function() {
 #' td <- load_imageset_ef(mnist, c(28,28))
 #' runShiny_general(td)
 runShiny_general <- function(td) {
+  stopifnot("td must be of class 'imageset_ef'" = is.imageset_ef(td))
+  stopifnot("td must be at least of length 1" = length(td)>0)
   shiny::runApp("inst/shiny-apps/shiny_general")
 }

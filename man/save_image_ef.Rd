@@ -11,7 +11,7 @@ save_image_ef(im, filename, filetype, path = NULL)
 
 \item{filename}{str, working names}
 
-\item{filetype}{str, "jpg" or "png"}
+\item{filetype}{str, "jpg", "jpeg" or "png"}
 
 \item{path}{str, optional. Default is current wd.}
 }

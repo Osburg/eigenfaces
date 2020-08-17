@@ -53,8 +53,8 @@ lassen sich die Eigenvektoren berechnen, die Eigengesichter genannt werden.
 Die ersten Eigengesichter geben die Lichtverhältnisse an, die nächsten die Frisur oder Mimik. Eigengesichter bilden somit die Grundstruktur ein Gesicht zu rekonstruieren. Diese ist für jeden Datensatz gleich. 
 
 ## Olivetti Datensatz
-In unserem Paket verwenden wir unter anderem den Olivetti Datensatz. 
-Der Datensatz wurde zwischen April 1992 und April 1994 erstellt und umfasst 400 Gesichtsfotos. Insgesamt wurden 40 verschiedene Personen zu 10 verschiedenen Zeiten mit varrierendem Lichteinfall, Gesichtsausdrücken, und Gesichtsdetails fotografiert.  Alle Gesichter haben einen schwarzen Hintergrund und sind schwarz-weiß fotografiert. Die Größe beträgt 64 * 64. 
+In unserem Paket verwenden wir unter anderem den Olivetti Datensatz. Das Paket lässt sich aber auch problemlos auf die MNIST Zahlen anwenden.
+Der Olivetti Datensatz wurde zwischen April 1992 und April 1994 erstellt und umfasst 400 Gesichtsfotos. Insgesamt wurden 40 verschiedene Personen zu 10 verschiedenen Zeiten mit varrierendem Lichteinfall, Gesichtsausdrücken, und Gesichtsdetails fotografiert.  Alle Gesichter haben einen schwarzen Hintergrund und sind schwarz-weiß fotografiert. Die Größe beträgt 64 * 64. 
 Die Personen sind durchnummeriert von 1 bis 40.
 Weitere Informationen erhält man mit ?Olivetti. 
 Der Datensatz lässt sich mit `load_imageset_ef(lst)` importieren. 

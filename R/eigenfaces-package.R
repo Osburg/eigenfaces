@@ -13,10 +13,10 @@
 # roxygen namespace tags. Modify with care!
 ## usethis namespace: start
 ## usethis namespace: end
+#' @import imager
 #' @import tidyverse
 #' @import pracma
 #' @import shiny
-#' @import imager
 #' @importFrom grDevices hcl.colors
 #' @importFrom graphics image
 #' @importFrom graphics mtext

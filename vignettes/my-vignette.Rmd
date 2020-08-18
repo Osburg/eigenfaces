@@ -43,7 +43,7 @@ Die Idee der maschinelle Gesichtserkennung mit der Technik der Hauptkomponentena
 
 ## Hauptkomponentenanalyse
 
-Bei einer Hauptkomponentenanalyse will man ganz allgemein die Dimensionalität eines Datensatzes, der aus vielen Variablen, besteht reduzieren. Dabei soll jedoch die im Datensatz vorhandene Variation bis zu einem maximalen Ausmaß erhalten bleibt. Eine statistische Verteilung in einem Datensatz ist deswegen notwendig für eine erfolgreiche Anwendung. Da Gesichter charakteristische Merkmale aufweisen, lässt sich das Verfahren sehr gut darauf anwenden.
+Mithilfe der Hauptkomponentenanalyse will man ganz allgemein die Dimensionalität eines Datensatzes, der aus vielen Variablen, besteht reduzieren. Dabei soll jedoch die im Datensatz vorhandene Variation bis zu einem maximalen Ausmaß erhalten bleibt. Eine statistische Verteilung in einem Datensatz ist deswegen notwendig für eine erfolgreiche Anwendung. Da Gesichter charakteristische Merkmale aufweisen, lässt sich das Verfahren sehr gut darauf anwenden.
 
 Um die Hauptkomponentenanalyse durchführen zu können, müssen die Gesichter normalisiert werden. Danach wird das Durchschnittsgesicht $\bar{X}$ aus dem kompletten Datenset von $x_i$ Gesichtern berechnet. 
 
@@ -89,8 +89,7 @@ par(mfrow=c(4,10),pin=c(1,1),mar=c(0.4,0.4,0.4,0.4))
 for (i in 1:4) {
   for(j in 1:10){
       idx <- (i-1)*10 + j
-       td[[idx]]%>%apply(1, rev) %>% t() %>%
-         image(col=hcl.colors(12, "Grays", rev = FALSE), xaxt = "n", yaxt = "n")
+      print(td[[idx]])
   }
 }
 ```
@@ -125,9 +124,7 @@ Die Funktion `get_eigenfaces(td, nfaces = 15, quick = FALSE)` berechnet die erst
 ef <- get_eigenfaces(td, 9)
 par(mfrow=c(3,3),pin=c(1,1),mar=c(0.4,0.4,0.4,0.4))
 for (i in 1:9) {
-  ef[[i]] %>% apply(1, rev) %>%
-    t() %>% image(col=hcl.colors(12, "Grays", rev = FALSE),
-                  xaxt = "n", yaxt = "n" )
+  print(ef[[i]])
 }
 ```
 

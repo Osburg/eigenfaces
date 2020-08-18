@@ -66,8 +66,7 @@ In unserem Paket verwenden wir den Olivetti Faces Datensatz. Das Paket lässt si
 
 Der Olivetti Faces Datensatz wurde zwischen April 1992 und April 1994 erstellt und umfasst 400 Bilder von Gesichtern. Insgesamt wurden 40 verschiedene Personen zu 10 verschiedenen Zeiten mit varrierendem Lichteinfall, Gesichtsausdrücken, und Gesichtsdetails fotografiert.  Alle Aufnahmen haben einen schwarzen Hintergrund und sind in schwarz-weiß fotografiert. Die Größe der jeweiligen Aufnahmen beträgt 64 * 64 pixel. 
 Die Personen sind durchnummeriert von 1 bis 40.
-Weitere Informationen erhält man mit `?Olivetti`. 
-
+Weitere Informationen erhält man mit `?Olivetti`.   
 Der Datensatz lässt sich mit `load_imageset_ef(path, imgDim)` importieren. Mittels print Befehl z.B. `td[[1]]` erhält man, wie unten zu sehen ist, das erste Bild der ersten Person des Datensets.
 
 ``` {r eval=FALSE}

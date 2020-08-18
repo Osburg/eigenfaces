@@ -20,7 +20,7 @@ Project is created with:
 * R Version: 4.0.2
 
 ## Setup 
-To run this project,...
+To run this project, we recommend using RStudio.
 
 ---
 
@@ -44,6 +44,23 @@ Projection of images onto the first two eigenfaces:
 
 ![Projection on eigenfaces](https://github.com/Osburg/eigenfaces/blob/master/inst/extdata/projection_blue.png)
 ![Projection on eigenfaces](https://github.com/Osburg/eigenfaces/blob/master/inst/extdata/projection_rainbow.png)
+
+---
+
+Furthermore, a classifcation algortihm is implemented. Here it is performed on picture 33 of the dataset.
+
+![3 Closest neighbor](https://github.com/Osburg/eigenfaces/blob/master/inst/extdata/closesttd33.png)
+
+---
+
+Additional content:
+* Shiny App
+* Vignette 
+* Extensive documentation
+
+---
+
+We recommend reading the [vignette](https://github.com/Osburg/eigenfaces/blob/master/vignettes/my-vignette.Rmd) for additional details.
 
 ## Sources 
 This Project is inspired by Marinovsky F., Wagner P., Gesichtserkennung mit Eigenfaces, FH Zittau/Görlitz

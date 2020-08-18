@@ -194,7 +194,7 @@ subtract_avg_face <- function(td) {
 #' Calculates the data covariance matrix of the original data.
 #' Returns eigenvectors (and eigenvalues) of the covariance matrix as an 'imageset_ef' object.
 #'
-#' \code{td} is the 'imageset_ef'-object where the images are saved as 'image_ef' objects. \code{showEigenvals} determins
+#' @details \code{td} is the 'imageset_ef'-object where the images are saved as 'image_ef' objects. \code{showEigenvals} determins
 #' whether the eigenvalues are returned in addition to the eigenvectors (FALSE means only the eigenvectors are returned).
 #' When the number of pixels of each images is much bigger than the number of images in \code{td} it is faster to diagonalize \code{t(A) %*% A}
 #' instead of the covariance matrix. However, this causes that only a subset of the eigenvectors of the covariance matrix is returned.
@@ -294,7 +294,7 @@ get_eigenfaces <- function(td, nfaces = 15, quick = FALSE) {
   stopifnot("quick must be logical" = is.logical(quick))
   stopifnot("quick must be of length 1" = length(quick)==1)
 
-  #Normalisiere die Eigengesichter und ziehe das Durchschnittsgesicht ab
+  #Normalisiere die Bilder des Datensatzes und ziehe das Durchschnittsgesicht ab
   td %>% normalize() %>% subtract_avg_face() -> td
 
   #Führe die Hauptkomponentenanalyse durch und entnehmen nur die ersten nfaces Eigenfaces

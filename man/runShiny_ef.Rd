@@ -18,5 +18,7 @@ eigenfaces.
 }
 \examples{
 # Opens Shiny App for Olivetti Dataset
+\dontrun{
 runShiny_ef()
+}
 }

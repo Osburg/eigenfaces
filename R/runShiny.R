@@ -17,7 +17,7 @@
 #' runShiny_ef()
 #' }
 runShiny_ef <- function() {
-  shiny::shinyAppDir(system.file("inst/shiny-apps/shiny_ef/", package = "eigenfaces"))
+  shiny::shinyAppDir(system.file("shiny-apps/shiny_ef/", package = "eigenfaces"))
 }
 
 
@@ -45,5 +45,5 @@ runShiny_ef <- function() {
 runShiny_general <- function(td) {
   stopifnot("td must be of class 'imageset_ef'" = is.imageset_ef(td))
   stopifnot("td must be at least of length 1" = length(td)>0)
-  shiny::shinyAppDir(system.file("inst/shiny-apps/shiny_general/", package = "eigenfaces"))
+  shiny::shinyAppDir(system.file("shiny-apps/shiny_general/", package = "eigenfaces"))
 }

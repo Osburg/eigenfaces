@@ -98,7 +98,7 @@ FSP.image_ef <- function(obj, eigenfaces, avgFace, showCoefficients = FALSE, ...
 #' td <- load_imageset_ef(olivetti, c(64,64))
 #' eigenfaces <- get_eigenfaces(td, nfaces = 50, quick=TRUE)
 #' avgFace <- avg_face(td)
-#' projection <- FSP(td, eigenfaces, avgFace, showCoefficients=FALSE)[[1]]
+#' projection <- FSP(td, eigenfaces, avgFace, showCoefficients=FALSE)
 #' @export
 FSP.imageset_ef <- function(obj, eigenfaces, avgFace, showCoefficients = FALSE, ...) {
   stopifnot("eigenfaces must be of class 'imageset_ef'" = is.imageset_ef(eigenfaces))

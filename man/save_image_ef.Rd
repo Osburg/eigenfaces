@@ -16,7 +16,7 @@ save_image_ef(im, filename, filetype, path = NULL)
 \item{path}{str, optional. Default is current wd.}
 }
 \value{
-
+the image is saved.
 }
 \description{
 Save any suitable array as image.

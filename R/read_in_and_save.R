@@ -58,7 +58,7 @@ load_any_imageset <- function(folderpath, filetype) {
 #' @param filetype str, "jpg", "jpeg" or "png"
 #' @param path str, optional. Default is current wd.
 #'
-#' @return
+#' @return the image is saved.
 #' @export
 #'
 #' @examples

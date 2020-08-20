@@ -194,9 +194,10 @@ subtract_avg_face <- function(td) {
 #' Calculates the data covariance matrix of the original data.
 #' Returns eigenvectors (and eigenvalues) of the covariance matrix as an 'imageset_ef' object.
 #'
-#' @details \code{td} is the 'imageset_ef'-object where the images are saved as 'image_ef' objects. \code{showEigenvals} determins
+#' @details
+#' \code{td} is the 'imageset_ef'-object where the images are saved as 'image_ef' objects. \code{showEigenvals} determins
 #' whether the eigenvalues are returned in addition to the eigenvectors (FALSE means only the eigenvectors are returned).
-#' When the number of pixels of each images is much bigger than the number of images in \code{td} it is faster to diagonalize \code{t(A) %*% A}
+#' When the number of pixels of each images is much bigger than the number of images in \code{td} it is faster to diagonalize t(A) \%*\% A
 #' instead of the covariance matrix. However, this causes that only a subset of the eigenvectors of the covariance matrix is returned.
 #' If quick is set TRUE, this option is activated.
 #'

@@ -13,9 +13,11 @@
 #'
 #' @examples
 #' # Opens Shiny App for Olivetti Dataset
+#' \dontrun{
 #' runShiny_ef()
+#' }
 runShiny_ef <- function() {
-  shiny::runApp("inst/shiny-apps/shiny_ef")
+  shiny::shinyAppDir(system.file("shiny-apps/shiny_ef/", package = "eigenfaces"))
 }
 
 
@@ -35,11 +37,13 @@ runShiny_ef <- function() {
 #'
 #' @examples
 #' # Opens Shiny App for (e.g.) MNIST Dataset
+#' \dontrun{
 #' mnist <- system.file("extdata","mnist_X.csv",package="eigenfaces")
 #' td <- load_imageset_ef(mnist, c(28,28))
 #' runShiny_general(td)
+#' }
 runShiny_general <- function(td) {
   stopifnot("td must be of class 'imageset_ef'" = is.imageset_ef(td))
   stopifnot("td must be at least of length 1" = length(td)>0)
-  shiny::runApp("inst/shiny-apps/shiny_general")
+  shiny::shinyAppDir(system.file("shiny-apps/shiny_general/", package = "eigenfaces"))
 }
